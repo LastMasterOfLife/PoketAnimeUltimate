@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Home/Card_Visual.dart';
 import 'package:poketanime/Home/Card_exaple.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,7 @@ class _SceltascreenState extends State<Sceltascreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (contex) => CardExample()));
+                                          builder: (contex) => CardVisual()));
                                 },
                                 child: Image.asset(
                                   object['fileName']!,
