@@ -55,28 +55,38 @@ class _CardVisualState extends State<CardVisual> {
         child: CircularProgressIndicator(),
       );
     }
+
+    // Invertiamo l'ordine solo per la visualizzazione
+    final reversedCards = List.from(cards.reversed);
+    final reversedVisibility = List.from(visibility.reversed);
+
     return Container(
       decoration: BoxDecoration(color: bianco),
       child: Stack(
         alignment: Alignment.center,
-        children: List.generate(cards.length, (index) {
-          final card = cards[index];
+        children: List.generate(reversedCards.length, (uiIndex) {
+          // Mappiamo l'indice UI (invertito) all'indice logico
+          final logicalIndex = reversedCards.length - 1 - uiIndex;
+          final card = reversedCards[uiIndex];
+
           return Visibility(
-            visible: visibility[index],
+            visible: reversedVisibility[uiIndex],
             child: GestureDetector(
               onTap: () {
-                if (index == cards.length - 1) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
-                    ),
-                  );
-                } else {
-                  setState(() {
-                    visibility[index] = false;
-                  });
-                }
+                setState(() {
+                  // Aggiorna lo stato usando l'indice logico
+                  visibility[logicalIndex] = false;
+
+                  // Naviga alla nuova schermata al tap sull'ultima carta logica
+                  if (logicalIndex == cards.length - 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
+                      ),
+                    );
+                  }
+                });
               },
               child: buildCard(card),
             ),
@@ -85,6 +95,7 @@ class _CardVisualState extends State<CardVisual> {
       ),
     );
   }
+
 
   Widget buildCard(Map<String, dynamic> card) {
     return Container(

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:poketanime/Collection/Collection_Screen.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/Switch_Pack.dart';
 
@@ -17,11 +18,11 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
   final List<Widget> _pages = [
     //Sceltascreen(),
     SwitchPack(),
+    CollectionScreen(),
     SwitchPack(),
     SwitchPack(),
     SwitchPack(),
-    SwitchPack(),
-    //CollectionScreen(),
+
     //ScambiScreen(),
     //LottaScreen(),
     //MenuScreen(),

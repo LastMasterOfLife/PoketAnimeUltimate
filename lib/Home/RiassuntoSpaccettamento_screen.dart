@@ -15,23 +15,24 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Nuova Schermata'),
-      ),
-      body: ListView.builder(
-        itemCount: widget.cards.length,
-        itemBuilder: (context, index) {
-          final card = widget.cards[index];
-          return Card(
-            margin: const EdgeInsets.all(10),
-            child: ListTile(
-              title: Text(card['fileName']),
-              subtitle: Text(card['description']),
-              leading: Image.asset(card['character']),
-              trailing: Image.asset(card['background']),
-            ),
-          );
-        },
+      body: Container(
+        child: Center(
+          child: ListView.builder(
+            itemCount: widget.cards.length,
+            itemBuilder: (context, index) {
+              final card = widget.cards[index];
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: ListTile(
+                  title: Text(card['fileName']),
+                  subtitle: Text(card['description']),
+                  leading: Image.asset(card['character']),
+                  trailing: Image.asset(card['background']),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

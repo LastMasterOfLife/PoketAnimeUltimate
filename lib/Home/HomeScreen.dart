@@ -168,24 +168,24 @@ class _HomescreenState extends State<Homescreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Homescreen(index: 1),));
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                         width: 110,
                         height: 90,
                         decoration: BoxDecoration(
                           color: secondary,
                           border: Border.all(color: terziario,width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(10))
+                          borderRadius: const BorderRadius.all(Radius.circular(10))
                         ),
                         child: Column(
                           children: [
-                            Text('Alpha Pack'),
-                            Image.asset('assets/pack_collect.png'),
+                            const Text('Alpha Pack'),
+                            Image.asset('assets/ImgEspansione/alpha_pack_collect.png'),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context); // Chiudi la modale
