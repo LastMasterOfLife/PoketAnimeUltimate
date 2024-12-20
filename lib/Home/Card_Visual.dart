@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
+import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Home/RiassuntoSpaccettamento_screen.dart';
 
 class CardVisual extends StatefulWidget {
   const CardVisual({super.key});
@@ -11,8 +13,8 @@ class CardVisual extends StatefulWidget {
 }
 
 class _CardVisualState extends State<CardVisual> {
-  List<Map<String, dynamic>> cards = [];  // Cambia il tipo in Map<String, dynamic>
-  int currentIndex = 0;
+  List<Map<String, dynamic>> cards = [];
+  late List<bool> visibility;
 
   // Recupera i dati delle carte dall'API
   Future<void> fetchCards() async {
@@ -22,8 +24,8 @@ class _CardVisualState extends State<CardVisual> {
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       setState(() {
-        // Estrai la lista di carte dalla chiave 'cards'
         final cardsList = data['cards'] as List<dynamic>;
+        cardsList.shuffle(); // Mescola l'elenco delle carte
         cards = cardsList.take(4).map((item) {
           return {
             'fileName': item['Nome'] ?? '',
@@ -32,11 +34,13 @@ class _CardVisualState extends State<CardVisual> {
             'character': item['Immagine_personaggio'] ?? '',
           };
         }).toList();
+        visibility = List<bool>.filled(cards.length, true);
       });
     } else {
       throw Exception('Errore nel recupero delle carte');
     }
   }
+
 
   @override
   void initState() {
@@ -46,28 +50,35 @@ class _CardVisualState extends State<CardVisual> {
 
   @override
   Widget build(BuildContext context) {
-    if (cards.isEmpty) {
+    if (cards.isEmpty || visibility == null) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          currentIndex = (currentIndex + 1) % cards.length;
-        });
-      },
+    return Container(
+      decoration: BoxDecoration(color: bianco),
       child: Stack(
         alignment: Alignment.center,
         children: List.generate(cards.length, (index) {
           final card = cards[index];
-          return AnimatedPositioned(
-            duration: const Duration(milliseconds: 300),
-            top: index == currentIndex ? 50 : 60 + index * 10,
-            left: index == currentIndex ? 20 : 30 + index * 5,
-            child: Opacity(
-              opacity: index == currentIndex ? 1.0 : 1.0,
-              child: buildCard(card, index == currentIndex),
+          return Visibility(
+            visible: visibility[index],
+            child: GestureDetector(
+              onTap: () {
+                if (index == cards.length - 1) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
+                    ),
+                  );
+                } else {
+                  setState(() {
+                    visibility[index] = false;
+                  });
+                }
+              },
+              child: buildCard(card),
             ),
           );
         }),
@@ -75,7 +86,7 @@ class _CardVisualState extends State<CardVisual> {
     );
   }
 
-  Widget buildCard(Map<String, dynamic> card, bool isTopCard) {
+  Widget buildCard(Map<String, dynamic> card) {
     return Container(
       width: 300,
       height: 300,
