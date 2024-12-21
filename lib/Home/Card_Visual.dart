@@ -16,16 +16,15 @@ class _CardVisualState extends State<CardVisual> {
   List<Map<String, dynamic>> cards = [];
   late List<bool> visibility;
 
-  // Recupera i dati delle carte dall'API
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/ab2e5e4b-3692-4cb3-b57e-f36839e7e7be');
+    final url = Uri.parse('https://mocki.io/v1/a41e7a76-0694-48ed-8943-2a9dfce772dc');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       setState(() {
         final cardsList = data['cards'] as List<dynamic>;
-        cardsList.shuffle(); // Mescola l'elenco delle carte
+        cardsList.shuffle();
         cards = cardsList.take(4).map((item) {
           return {
             'fileName': item['Nome'] ?? '',

@@ -46,14 +46,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index];
-            return gridItem(item['image'], item['locked'], itemHeight,itemWidth);
+            return gridItem(item['image'], item['locked'], itemHeight,itemWidth,index);
           },
         ),
       ),
     );
   }
 
-  Widget gridItem(String imagePath, bool locked, double height, double width) {
+  Widget gridItem(String imagePath, bool locked, double height, double width, int index) {
     return SizedBox(
       height: height,
       width: width,
@@ -68,7 +68,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             InkWell(
               onTap: () {
                 if (!locked) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => CardExample()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => CardExample(index: index,)));
                 }
               },
               child: ClipRRect(
