@@ -26,11 +26,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
       setState(() {
         items = cardsList.map((item) {
+          final itemId = item['Id'].toString(); // Assicurati che 'Id' sia una stringa
+          final isDiscovered = widget.cardIds?.contains(itemId) ?? false;
+          final isLocked = !isDiscovered;
           return {
-            'id': item['Id'], // Aggiungiamo l'ID per il confronto
+            'id': itemId, // Aggiungiamo l'ID per il confronto
             'image': item['Immagine_sfondo'] ?? '',
-            'locked': !(widget.cardIds?.contains(item['Id']) ?? false),
-            'discovered': widget.cardIds?.contains(item['Id']) ?? false, // Controllo degli ID
+            'locked': isLocked,
+            'discovered': isDiscovered, // Controllo degli ID
           };
         }).toList();
         isLoading = false;
