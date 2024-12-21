@@ -27,6 +27,7 @@ class _CardVisualState extends State<CardVisual> {
         cardsList.shuffle();
         cards = cardsList.take(4).map((item) {
           return {
+            'id' : item['Id'] ?? '',
             'fileName': item['Nome'] ?? '',
             'description': item['Descrizione'] ?? '',
             'background': item['Immagine_sfondo'] ?? '',

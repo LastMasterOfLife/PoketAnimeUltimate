@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:poketanime/Home/Card_exaple.dart';
 
 class CollectionScreen extends StatefulWidget {
-  const CollectionScreen({super.key});
+  final List<dynamic>? cardIds; // Lista di ID passati come parametro
+  const CollectionScreen({super.key, this.cardIds = const []});
 
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
@@ -15,7 +16,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
   bool isLoading = true;
 
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/a41e7a76-0694-48ed-8943-2a9dfce772dc');
+    final url = Uri.parse(
+        'https://mocki.io/v1/a41e7a76-0694-48ed-8943-2a9dfce772dc');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -25,8 +27,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
       setState(() {
         items = cardsList.map((item) {
           return {
+            'id': item['Id'], // Aggiungiamo l'ID per il confronto
             'image': item['Immagine_sfondo'] ?? '',
-            'locked': item['locked'] ?? true, // Aggiungi una chiave 'locked' se disponibile
+            'locked': !(widget.cardIds?.contains(item['Id']) ?? false),
+            'discovered': widget.cardIds?.contains(item['Id']) ?? false, // Controllo degli ID
           };
         }).toList();
         isLoading = false;
@@ -47,6 +51,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
     const double itemHeight = 50.0;
     const double itemWidth = 30.0;
 
+
+
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -56,22 +63,37 @@ class _CollectionScreenState extends State<CollectionScreen> {
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // 3 container per riga
-            crossAxisSpacing: 9.0, // Spazio orizzontale tra i container
-            mainAxisSpacing: 20.0, // Spazio verticale tra i container
+            crossAxisCount: 3,
+            crossAxisSpacing: 9.0,
+            mainAxisSpacing: 20.0,
             childAspectRatio: itemWidth / itemHeight,
           ),
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index];
-            return gridItem(item['image'], item['locked'], itemHeight, itemWidth, index);
+
+            print('Card IDs passed: ${widget.cardIds}');
+            print('Current card ID: ${item['Id']}');
+
+            return gridItem(
+                item['image'],
+                item['locked'],
+                item['discovered'], // Passiamo la variabile discovered
+                itemHeight,
+                itemWidth,
+                index);
+
           },
+
         ),
       ),
     );
   }
 
-  Widget gridItem(String imagePath, bool locked, double height, double width, int index) {
+
+
+  Widget gridItem(String imagePath, bool locked, bool discovered, double height,
+      double width, int index) {
     return SizedBox(
       height: height,
       width: width,
@@ -85,10 +107,12 @@ class _CollectionScreenState extends State<CollectionScreen> {
           children: [
             InkWell(
               onTap: () {
-                if (!locked) {
+                if (!locked && discovered) { // Verifica che sia scoperto e non bloccato
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CardExample(index: index)),
+                    MaterialPageRoute(
+                      builder: (context) => CardExample(index: index),
+                    ),
                   );
                 }
               },
@@ -100,12 +124,15 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   fit: BoxFit.cover,
                   height: double.infinity,
                   width: double.infinity,
-                  loadingBuilder: (context, child, loadingProgress) {
+                  loadingBuilder:
+                      (context, child, loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator());
                   },
                   errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.broken_image, color: Colors.red);
+                    return const Icon(Icons.broken_image,
+                        color: Colors.red);
                   },
                 )
                     : Image.asset(
@@ -130,6 +157,12 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   size: 35,
                 ),
               ),
+            if (!locked && discovered)
+              const Icon(
+                Icons.check_circle,
+                color: Colors.green,
+                size: 30,
+              ), // Mostra un'icona se l'elemento è scoperto
           ],
         ),
       ),
