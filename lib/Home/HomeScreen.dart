@@ -8,8 +8,9 @@ import 'package:vector_math/vector_math_64.dart' as math hide Colors;
 
 class Homescreen extends StatefulWidget {
   final int index;
+  final bool active;
 
-  const Homescreen({super.key, required this.index});
+  const Homescreen({super.key, required this.index, this.active = false});
 
   @override
   State<Homescreen> createState() => _HomescreenState();
@@ -83,6 +84,7 @@ class _HomescreenState extends State<Homescreen> {
                     _buildButton(
                       context,
                       label: 'Apri una busta',
+                      active: widget.active,
                       fontSize: 20,
                       onPressed: () => Navigator.push(
                         context,
@@ -213,6 +215,7 @@ class _HomescreenState extends State<Homescreen> {
       BuildContext context, {
         required String label,
         required VoidCallback onPressed,
+        bool active = false,
         bool isPrimary = true,
         double fontSize = 15,
         TextAlign textAlign = TextAlign.left,
@@ -225,7 +228,7 @@ class _HomescreenState extends State<Homescreen> {
         backgroundColor: isPrimary ? terziario : bianco,
         shape: shape ?? const RoundedRectangleBorder(),
         elevation: 8,
-        shadowColor: primary.withOpacity(0.5),
+        shadowColor: active ? primary.withOpacity(0.5) : terziario,
       ),
       child: Text(
         label,

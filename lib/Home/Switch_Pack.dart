@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
@@ -18,6 +22,65 @@ class _SwitchPackState extends State<SwitchPack> {
   ];
 
   int _currentIndex = 1; // Traccia l'indice corrente della slide
+
+  int _seconds = 30;
+  late Timer _timer;
+  bool _showTimer = true;
+
+  int _seconds2 = 30;
+  late Timer _timer2;
+  bool _showTimer2 = true;
+
+  int _seconds3 = 30;
+  late Timer _timer3;
+  bool _showTimer3 = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds--;
+        if (_seconds == 0) {
+          _showTimer = !_showTimer;
+          _timer.cancel();
+          if (!_showTimer) {
+            _startTimer2();
+          }  
+        }
+      });
+    });
+  }
+  void _startTimer2() {
+    _timer2 = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds2--;
+        if (_seconds2 == 0) {
+          _showTimer2 = !_showTimer2;
+          _timer2.cancel();
+          if (!_showTimer2) {
+            _startTimer3();
+          }  
+        }
+      });
+    });
+  }void _startTimer3() {
+    _timer3 = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds3--;
+        if (_seconds3 == 0) {
+          _showTimer3 = !_showTimer3;
+          if (_seconds3 == 28800) {
+            _startTimer();
+          }  
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +168,16 @@ class _SwitchPackState extends State<SwitchPack> {
                         ),
                       ),
                       const SizedBox(
-                        width: 80,
+                        width: 60,
                       ),
-                      Container(
-                          child: Image.asset(
-                        'assets/icons/clessidre_icon.png',
-                        scale: 18,
-                      ))
+                      Transform.rotate(
+                        angle: 18 * pi/180,
+                        child: Container(
+                            child: Image.asset(
+                          'assets/icons/cless_icon.png',
+                          scale: 10,
+                        )),
+                      )
                     ],
                   ),
                 ),
@@ -122,7 +188,7 @@ class _SwitchPackState extends State<SwitchPack> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Container(
-                    height: 440,
+                    height: 445,
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     decoration: const BoxDecoration(
                         color: Colors.white,
@@ -198,36 +264,216 @@ class _SwitchPackState extends State<SwitchPack> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: terziario.withOpacity(0.5),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(5))),
-                                height: 70,
-                                width: 45,
+                              DottedBorder(
+                                color:  _showTimer ? Colors.grey.shade400 : nero,
+                                strokeWidth: 1,
+                                dashPattern: _showTimer ? [2,4] : [100,0], // lunghezza, spazio
+                                borderType: BorderType.RRect,
+                                radius: Radius.circular(5),
+                                child: Container(
+                                  height: 70,
+                                  width: 45,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 13,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: _showTimer
+                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                              : null, // Nessun colore se non visibile
+                                          gradient: !_showTimer
+                                              ? LinearGradient(
+                                            colors: [
+                                              Colors.purpleAccent.shade100, // Viola chiaro
+                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                            ],
+                                            begin: Alignment.centerRight,
+                                            end: Alignment.centerLeft,
+                                          )
+                                              : null, // Nessun gradiente quando il timer è attivo
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                        ),
+                                        child: _showTimer
+                                            ? Text('$_seconds') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        height: 5,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: _showTimer
+                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                                : null, // Nessun colore se non visibile
+                                            gradient: !_showTimer
+                                                ? LinearGradient(
+                                              colors: [
+                                                Colors.purpleAccent.shade100, // Viola chiaro
+                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                              ],
+                                              begin: Alignment.centerRight,
+                                              end: Alignment.centerLeft,
+                                            )
+                                                : null,
+                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                               const SizedBox(
                                 width: 20,
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: terziario.withOpacity(0.5),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(5))),
-                                height: 70,
-                                width: 45,
+                              DottedBorder(
+                                color:  _showTimer2 ? Colors.grey.shade400 : nero,
+                                strokeWidth: 1,
+                                dashPattern: _showTimer2 ? [2,4] : [100,0], // lunghezza, spazio
+                                borderType: BorderType.RRect,
+                                radius: Radius.circular(5),
+                                child: Container(
+                                  height: 70,
+                                  width: 45,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 13,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: _showTimer2
+                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                              : null, // Nessun colore se non visibile
+                                          gradient: !_showTimer2
+                                              ? LinearGradient(
+                                            colors: [
+                                              Colors.purpleAccent.shade100, // Viola chiaro
+                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                            ],
+                                            begin: Alignment.centerRight,
+                                            end: Alignment.centerLeft,
+                                          )
+                                              : null, // Nessun gradiente quando il timer è attivo
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                        ),
+                                        child: _showTimer2
+                                        ? Text('$_seconds2') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        height: 5,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: _showTimer2
+                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                                : null, // Nessun colore se non visibile
+                                            gradient: !_showTimer2
+                                                ? LinearGradient(
+                                              colors: [
+                                                Colors.purpleAccent.shade100, // Viola chiaro
+                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                              ],
+                                              begin: Alignment.centerRight,
+                                              end: Alignment.centerLeft,
+                                            )
+                                                : null,
+                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                               const SizedBox(
                                 width: 20,
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: terziario.withOpacity(0.5),
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(5))),
-                                height: 70,
-                                width: 45,
-                              )
+                              DottedBorder(
+                                color:  _showTimer3 ? Colors.grey.shade400 : nero,
+                                strokeWidth: 1,
+                                dashPattern: _showTimer3 ? [2,4] : [100,0], // lunghezza, spazio
+                                borderType: BorderType.RRect,
+                                radius: Radius.circular(5),
+                                child: Container(
+                                  height: 70,
+                                  width: 45,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 13,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: _showTimer3
+                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                              : null, // Nessun colore se non visibile
+                                          gradient: !_showTimer3
+                                              ? LinearGradient(
+                                            colors: [
+                                              Colors.purpleAccent.shade100, // Viola chiaro
+                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                            ],
+                                            begin: Alignment.centerRight,
+                                            end: Alignment.centerLeft,
+                                          )
+                                              : null, // Nessun gradiente quando il timer è attivo
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(5),
+                                            topRight: Radius.circular(5),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                        ),
+                                        child: _showTimer3
+                                            ? Text('$_seconds3') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                        height: 5,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: _showTimer3
+                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
+                                                : null, // Nessun colore se non visibile
+                                            gradient: !_showTimer3
+                                                ? LinearGradient(
+                                              colors: [
+                                                Colors.purpleAccent.shade100, // Viola chiaro
+                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                              ],
+                                              begin: Alignment.centerRight,
+                                              end: Alignment.centerLeft,
+                                            )
+                                                : null,
+                                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -240,13 +486,21 @@ class _SwitchPackState extends State<SwitchPack> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (contex) =>
-                                        Homescreen(index: _currentIndex)));
+                                        Homescreen(index: _currentIndex,active: true,)));
                           },
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration:  BoxDecoration(
                                 color: primary,
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
+                                    const BorderRadius.all(Radius.circular(30)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: _showTimer || _showTimer2 || _showTimer3 ? Colors.transparent : Colors.blueAccent,
+                                  blurRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 17,
+                                  spreadRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 2
+                                )
+                              ]
+                            ),
                             child: const Padding(
                               padding: EdgeInsets.all(15.0),
                               child: Text(
@@ -268,7 +522,7 @@ class _SwitchPackState extends State<SwitchPack> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 160,
+                        height: 140,
                         width: 110,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -312,7 +566,7 @@ class _SwitchPackState extends State<SwitchPack> {
                         width: 10,
                       ),
                       Container(
-                        height: 160,
+                        height: 140,
                         width: 110,
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -356,7 +610,7 @@ class _SwitchPackState extends State<SwitchPack> {
                         width: 10,
                       ),
                       Container(
-                        height: 160,
+                        height: 140,
                         width: 110,
                         decoration: BoxDecoration(
                           color: Colors.white,
