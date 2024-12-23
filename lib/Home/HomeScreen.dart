@@ -19,7 +19,7 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   final List<Map<String, dynamic>> objects = [
     {
-      'fileName': 'assets/pacchetto_Mushoku_Tensei.obj',
+      'fileName': 'assets/3DPack/Mushoku_Tensei/Pacchetto_Mushoku_Tensei_ultimo.obj',
       'rotation': math.Vector3(0, -90, 0),
       'scale': math.Vector3(6, 6, 6),
     },

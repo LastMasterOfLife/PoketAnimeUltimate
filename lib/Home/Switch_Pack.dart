@@ -47,7 +47,6 @@ class _SwitchPackState extends State<SwitchPack> {
         _seconds--;
         if (_seconds == 0) {
           _showTimer = !_showTimer;
-          _timer.cancel();
           if (!_showTimer) {
             _startTimer2();
           }  
@@ -76,7 +75,7 @@ class _SwitchPackState extends State<SwitchPack> {
           _showTimer3 = !_showTimer3;
           if (_seconds3 == 28800) {
             _startTimer();
-          }  
+          }
         }
       });
     });
@@ -305,7 +304,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer
-                                            ? Text('$_seconds') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                            ? Center(child: Text('$_seconds')) : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
                                       ),
                                       Spacer(),
                                       Container(
@@ -376,7 +375,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer2
-                                        ? Text('$_seconds2') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                        ? Center(child: Text('$_seconds2')) : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
                                       ),
                                       Spacer(),
                                       Container(
@@ -447,7 +446,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer3
-                                            ? Text('$_seconds3') : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
+                                            ? Center(child: Text('$_seconds3')) : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
                                       ),
                                       Spacer(),
                                       Container(
@@ -495,9 +494,9 @@ class _SwitchPackState extends State<SwitchPack> {
                                     const BorderRadius.all(Radius.circular(30)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: _showTimer || _showTimer2 || _showTimer3 ? Colors.transparent : Colors.blueAccent,
-                                  blurRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 17,
-                                  spreadRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 2
+                                  color: _showTimer || _showTimer2 || _showTimer3 ? Colors.transparent : quaternario,
+                                  blurRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 8,
+                                  spreadRadius: _showTimer || _showTimer2 || _showTimer3 ? 0 : 1
                                 )
                               ]
                             ),
