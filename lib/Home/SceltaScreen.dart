@@ -28,46 +28,6 @@ class _SceltascreenState extends State<Sceltascreen> {
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
   ];
 
-  final List<Map<String, String>> cardsKaisen = [
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Toji Fushiguro', 'description': 'è riuscino nell\'impresa di mettere seriamente in difficoltà Gojo', 'background': 'assets/toji_fushiguro_card.jpg', 'character': 'assets/toji_fushiguro_personaggio.png' },
-    {'fileName': 'Yuuji Itadori', 'description': 'Il contenitore ideale per Sukuna', 'background': 'assets/yuuji_itadori_card.jpg', 'character': 'assets/yuuji_itadori_personaggio.png' },
-
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-    {'fileName': 'Gojo Satoru', 'description': 'Si pensa sia il più forte di tutto l\'anime', 'background': 'assets/gojo_card.jpg', 'character': 'assets/gojo_card_personaggio.png' },
-
-  ];
 
   int _currentIndex = 6; // Traccia l'indice corrente della slide
 

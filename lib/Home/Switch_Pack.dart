@@ -5,7 +5,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
+import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
 
 class SwitchPack extends StatefulWidget {
   const SwitchPack({super.key});
@@ -544,7 +546,9 @@ class _SwitchPackState extends State<SwitchPack> {
                         child: Column(
                           children: [
                             InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                },
                                 child: Padding(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
