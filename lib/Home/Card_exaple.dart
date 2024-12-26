@@ -4,7 +4,7 @@ import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
 
 class CardExample extends StatefulWidget {
-  final int index; // Id della carta
+  final int index;
   const CardExample({super.key, required this.index});
 
   @override
@@ -34,22 +34,22 @@ class _CardExampleState extends State<CardExample> {
     }
   }
 
-  // Funzione per generare le stelle in base alla rarità
+
   List<Widget> buildStars(String rarita) {
     int starCount = 0;
 
     switch (rarita) {
       case "Comune":
-        starCount = 1; // Una stella
+        starCount = 1;
         break;
       case "Rara":
-        starCount = 3; // Tre stelle
+        starCount = 3;
         break;
       case "Speciale":
-        starCount = 5; // Cinque stelle
+        starCount = 5;
         break;
       default:
-        starCount = 0; // Nessuna stella per rarità sconosciuta
+        starCount = 0;
     }
 
     return List.generate(
@@ -84,51 +84,25 @@ class _CardExampleState extends State<CardExample> {
             children: [
               const SizedBox(height: 20),
               Center(
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  child: Tilt(
-                    borderRadius: BorderRadius.circular(5),
-                    tiltConfig: const TiltConfig(angle: 15),
-                    lightConfig: const LightConfig(
-                      minIntensity: 0.1,
-                    ),
-                    shadowConfig: const ShadowConfig(
-                      minIntensity: 0.05,
-                      maxIntensity: 0.4,
-                      offsetFactor: 0.08,
-                      minBlurRadius: 10,
-                      maxBlurRadius: 15,
-                    ),
-                    childLayout: ChildLayout(outer: [
-                      Positioned(
-                          top: -40,
-                          child: TiltParallax(
-                              size: const Offset(-20, -20),
-                              child: Image.asset(card['Immagine_personaggio'],scale: 2,))),
-
-                    ]),
-                    child: Image.asset(card['Immagine_sfondo']),
-                  ),
-                ),
+                child: buildCard(card),
               ),
               // Nome
               Text(
-                card['Nome'],
+                card['Nome'] ?? 'Sconosciuto',
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
               const SizedBox(height: 10),
               // Rarità con stelle
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: buildStars(card['Rarita']),
+                children: buildStars(card['Rarita'] ?? ''),
               ),
               const SizedBox(height: 10),
               // Descrizione
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  card['Descrizione'],
+                  card['Descrizione'] ?? '',
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 16),
                 ),
@@ -136,6 +110,141 @@ class _CardExampleState extends State<CardExample> {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget buildCard(Map<String, dynamic> card) {
+    return Tilt(
+      child: Container(
+        width: 300,
+        height: 450,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: const DecorationImage(image: AssetImage('assets/Border/comune.jpg'),fit: BoxFit.cover),
+          /*
+          gradient: const LinearGradient(
+            colors: [Colors.yellow, Colors.orange], // Colori del gradiente
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      
+           */
+        ),
+        child: Container(
+          margin: const EdgeInsets.all(10), // Spazio per il bordo
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.transparent,
+          ),
+          child: Stack(
+            children: [
+              // Sfondo della carta
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    card['Immagine_sfondo'] ?? '',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              // Immagine del personaggio
+              Positioned(
+                top: 20,
+                left: 50,
+                right: 50,
+                bottom: 20,
+                child: TiltParallax(
+                  size: const Offset(20, 20),
+                  child: Container(
+                    child: Image.asset(
+                      card['Immagine_personaggio'] ?? '',
+                      fit: BoxFit.contain,
+                      scale: 4.5,
+                    ),
+                  ),
+                ),
+              ),
+              // Nome del personaggio
+              Positioned(
+                top: 10,
+                left: 15,
+                right: 15,
+                child: Center(
+                  child: Text(
+                    card['Nome'] ?? '', // Nome del personaggio
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(1, 1),
+                          color: Colors.black,
+                          blurRadius: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              // Statistiche
+              Positioned(
+                bottom: 40,
+                left: 15,
+                right: 15,
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Abilità: ${card['abilities'] ?? ''}",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "Attacco: ${card['attack'] ?? ''}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        "Difesa: ${card['defense'] ?? ''}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Text(
+                        "Velocità: ${card['speed'] ?? ''}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Energia in basso
+              Positioned(
+                bottom: 10,
+                right: 15,
+                child: Row(
+                  children: [
+                    const Icon(Icons.bolt, color: Colors.yellow, size: 24),
+                    Text(
+                      "${card['energy'] ?? ''}",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
