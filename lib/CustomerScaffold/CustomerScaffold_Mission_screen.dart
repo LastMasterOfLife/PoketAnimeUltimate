@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Mission/Giornaliere_screen.dart';
 
 class CustomerscaffoldMissionScreen extends StatefulWidget {
   const CustomerscaffoldMissionScreen({super.key});
@@ -29,7 +30,7 @@ class _CustomerscaffoldMissionScreenState
   }
 
   final List<Widget> pages = [
-    Center(child: Text("Pagina 1", style: TextStyle(fontSize: 24))),
+    GiornaliereScreen(),
     Center(child: Text("Pagina 2", style: TextStyle(fontSize: 24))),
     Center(child: Text("Pagina 3", style: TextStyle(fontSize: 24))),
     Center(child: Text("Pagina 4", style: TextStyle(fontSize: 24))),
@@ -73,7 +74,7 @@ class _CustomerscaffoldMissionScreenState
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: gionaliero ? terziario.withOpacity(0.9) : Colors.white,
-                        elevation: 8
+                        elevation: 8,
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
@@ -141,7 +142,7 @@ class _CustomerscaffoldMissionScreenState
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: premium ? terziario.withOpacity(0.9) : Colors.white,
+                          backgroundColor: premium ? Colors.orangeAccent.withOpacity(1) : Colors.white,
                           elevation: 8
                       ),
                       child: const Padding(

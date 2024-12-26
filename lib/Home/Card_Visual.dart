@@ -17,7 +17,7 @@ class _CardVisualState extends State<CardVisual> {
   late List<bool> visibility;
 
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/a41e7a76-0694-48ed-8943-2a9dfce772dc');
+    final url = Uri.parse('https://mocki.io/v1/0bb0c579-882e-4d78-96c6-c009179e2e13');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -27,11 +27,16 @@ class _CardVisualState extends State<CardVisual> {
         cardsList.shuffle();
         cards = cardsList.take(4).map((item) {
           return {
-            'id' : item['Id'] ?? '',
+            'id': item['Id'] ?? '',
             'fileName': item['Nome'] ?? '',
             'description': item['Descrizione'] ?? '',
             'background': item['Immagine_sfondo'] ?? '',
             'character': item['Immagine_personaggio'] ?? '',
+            'abilities': item['abilities'] ?? '',
+            'attack': item['attack'] ?? '',
+            'defense': item['defense'] ?? '',
+            'speed': item['speed'] ?? '',
+            'energy': item['energy'] ?? '',
           };
         }).toList();
         visibility = List<bool>.filled(cards.length, true);
@@ -40,7 +45,6 @@ class _CardVisualState extends State<CardVisual> {
       throw Exception('Errore nel recupero delle carte');
     }
   }
-
 
   @override
   void initState() {
@@ -60,92 +64,169 @@ class _CardVisualState extends State<CardVisual> {
     final reversedCards = List.from(cards.reversed);
     final reversedVisibility = List.from(visibility.reversed);
 
-    return Container(
-      decoration: BoxDecoration(color: bianco),
-      child: Stack(
-        alignment: Alignment.center,
-        children: List.generate(reversedCards.length, (uiIndex) {
-          // Mappiamo l'indice UI (invertito) all'indice logico
-          final logicalIndex = reversedCards.length - 1 - uiIndex;
-          final card = reversedCards[uiIndex];
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Tilt(
+          child: Stack(
+            alignment: Alignment.center,
+            children: List.generate(reversedCards.length, (uiIndex) {
+              final logicalIndex = reversedCards.length - 1 - uiIndex;
+              final card = reversedCards[uiIndex];
 
-          return Visibility(
-            visible: reversedVisibility[uiIndex],
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  // Aggiorna lo stato usando l'indice logico
-                  visibility[logicalIndex] = false;
-
-                  // Naviga alla nuova schermata al tap sull'ultima carta logica
-                  if (logicalIndex == cards.length - 1) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
-                      ),
-                    );
-                  }
-                });
-              },
-              child: buildCard(card),
-            ),
-          );
-        }),
+              return Visibility(
+                visible: reversedVisibility[uiIndex],
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      visibility[logicalIndex] = false;
+                      if (logicalIndex == cards.length - 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  child: buildCard(card),
+                ),
+              );
+            }),
+          ),
+        ),
       ),
     );
   }
-
 
   Widget buildCard(Map<String, dynamic> card) {
     return Container(
       width: 300,
-      height: 300,
-      child: Tilt(
-        borderRadius: BorderRadius.circular(5),
-        tiltConfig: const TiltConfig(angle: 15),
-        lightConfig: const LightConfig(
-          minIntensity: 0.1,
+      height: 450,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        gradient: const LinearGradient(
+          colors: [Colors.yellow, Colors.orange], // Colori del gradiente
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        shadowConfig: const ShadowConfig(
-          minIntensity: 0.05,
-          maxIntensity: 0.4,
-          offsetFactor: 0.08,
-          minBlurRadius: 10,
-          maxBlurRadius: 15,
+      ),
+      child: Container(
+        margin: const EdgeInsets.all(10), // Spazio per il bordo
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.transparent,
         ),
-        childLayout: ChildLayout(outer: [
-          Positioned(
-            top: -40,
-            child: TiltParallax(
-              size: const Offset(-20, -20),
-              child: Image.asset(
-                card['character'],
-                scale: 2,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 70,
-            child: TiltParallax(
-              size: const Offset(25, 25),
-              child: SizedBox(
-                width: 48,
-                height: 48,
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  elevation: 0.0,
-                  child: const Icon(Icons.search),
+        child: Stack(
+          children: [
+            // Sfondo della carta
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  card['background'],
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-        ]),
-        child: Image.asset(
-          card['background'],
+            // Immagine del personaggio
+            Positioned(
+              top: 20,
+              left: 50,
+              right: 50,
+              bottom: 20,
+              child: TiltParallax(
+                size: const Offset(20, 20),
+                child: Container(
+                  child: Image.asset(
+                    card['character'],
+                    fit: BoxFit.contain,
+                    scale: 4.5,
+                  ),
+                ),
+              ),
+            ),
+            // Nome del personaggio
+            Positioned(
+              top: 10,
+              left: 15,
+              right: 15,
+              child: Center(
+                child: Text(
+                  card['fileName'], // Nome del personaggio
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(1, 1),
+                        color: Colors.black,
+                        blurRadius: 3,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Statistiche
+            Positioned(
+              bottom: 40,
+              left: 15,
+              right: 15,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Abilità: ${card['abilities']}",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      "Attacco: ${card['attack']}",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      "Difesa: ${card['defense']}",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      "Velocità: ${card['speed']}",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Energia in basso
+            Positioned(
+              bottom: 10,
+              right: 15,
+              child: Row(
+                children: [
+                  Icon(Icons.bolt, color: Colors.yellow, size: 24),
+                  Text(
+                    "${card['energy']}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+
 }

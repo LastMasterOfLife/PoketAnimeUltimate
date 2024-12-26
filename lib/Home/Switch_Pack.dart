@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
@@ -91,7 +92,6 @@ class _SwitchPackState extends State<SwitchPack> {
               image: DecorationImage(
                   image: AssetImage('assets/Sfondi/sfondo_pachetto.png'),
                   fit: BoxFit.cover),
-              //color: Color(0xFFA1DBF8),
             ),
             child: Column(
               children: [
@@ -520,29 +520,80 @@ class _SwitchPackState extends State<SwitchPack> {
                   height: 180,
                   decoration: const BoxDecoration(color: Colors.transparent),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: NeuBox(
+                          child: Container(
+                            height: 140,
+                            width: 110,
+                            child: Column(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                    },
+                                    child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 20),
+                                        child: Image.asset(
+                                          color: nero,
+                                          'assets/icons/mission_icon.png',
+                                          fit: BoxFit.contain,
+                                          scale: 6.5,
+                                        ))),
+                                Text(
+                                  'Missioni',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: NeuBox(
+                          child: Container(
+                            height: 140,
+                            width: 110,
+                            child: Column(
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                    },
+                                    child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 20),
+                                        child: Image.asset(
+                                          color: nero,
+                                          'assets/icons/oggetti_icon.png',
+                                          fit: BoxFit.contain,
+                                          scale: 0.5,
+                                        ))),
+                                const Text(
+                                  'Oggetti',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                    child: NeuBox(
+                      child: Container(
                         height: 140,
                         width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:
-                              Border.all(color: Colors.transparent, width: 1),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blueAccent.shade200,
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(1, 1),
-                            ),
-                          ],
-                        ),
                         child: Column(
                           children: [
                             InkWell(
@@ -550,108 +601,25 @@ class _SwitchPackState extends State<SwitchPack> {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
                                 },
                                 child: Padding(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 20),
                                     child: Image.asset(
                                       color: nero,
-                                      'assets/icons/mission_icon.png',
+                                      'assets/icons/cards_icon.png',
                                       fit: BoxFit.contain,
-                                      scale: 6.5,
+                                      scale: 2.5,
                                     ))),
-                            Text(
-                              'Missioni',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 140,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:
-                              Border.all(color: Colors.transparent, width: 1),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blueAccent.shade200,
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(1, 1),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Image.asset(
-                                    color: nero,
-                                    'assets/icons/oggetti_icon.png',
-                                    fit: BoxFit.contain,
-                                    scale: 0.5,
-                                  ),
-                                )),
-                            Text(
-                              'Oggetti',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 140,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:
-                              Border.all(color: Colors.transparent, width: 1),
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                              bottomLeft: Radius.circular(20)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.blueAccent.shade200,
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(1, 1),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            InkWell(
-                                onTap: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Image.asset(
-                                    color: nero,
-                                    'assets/icons/cards_icon.png',
-                                    fit: BoxFit.contain,
-                                    scale: 2.5,
-                                  ),
-                                )),
-                            Text(
+                            const Text(
                               'Pesca misteriosa',
                               style: TextStyle(color: Colors.grey),
                             ),
                           ],
                         ),
+                      ),
+                    ),
+                  ),
+                      const SizedBox(
+                        width: 10,
                       ),
                     ],
                   ),

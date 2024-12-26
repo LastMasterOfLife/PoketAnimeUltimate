@@ -22,7 +22,7 @@ class _CardExampleState extends State<CardExample> {
 
   // Funzione per ottenere i dati della carta specifica
   Future<Map<String, dynamic>> fetchCardData(int id) async {
-    const String apiUrl = "https://mocki.io/v1/a41e7a76-0694-48ed-8943-2a9dfce772dc";
+    const String apiUrl = "https://mocki.io/v1/0bb0c579-882e-4d78-96c6-c009179e2e13";
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {

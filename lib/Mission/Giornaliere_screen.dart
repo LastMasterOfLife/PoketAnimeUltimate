@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:poketanime/Componets/Neu_box.dart';
 
 class GiornaliereScreen extends StatefulWidget {
   const GiornaliereScreen({super.key});
@@ -11,32 +12,28 @@ class GiornaliereScreen extends StatefulWidget {
 class _GiornaliereScreenState extends State<GiornaliereScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          child: Column(
-            children: [
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.blue
-                ),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color: Colors.grey.shade200),
+        child: Column(
+          children: [
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/Sfondi/sky_g.jpg'),fit: BoxFit.cover)
               ),
-              Container(
-                height: 20,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white
-                ),
+            ),
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white
               ),
-              Container(
-                height: double.infinity,
-              )
-            ],
-          ),
-        ),
-      ],
+              child: Center(child: Text('tempo')),
+            )
+          ],
+        )
+      ),
     );
   }
 }
