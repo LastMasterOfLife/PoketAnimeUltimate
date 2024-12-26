@@ -45,7 +45,7 @@ class _CardExampleState extends State<CardExample> {
       case "Rara":
         starCount = 3;
         break;
-      case "Speciale":
+      case "UltraRara":
         starCount = 5;
         break;
       default:
@@ -151,17 +151,15 @@ class _CardExampleState extends State<CardExample> {
               ),
               // Immagine del personaggio
               Positioned(
-                top: 20,
-                left: 50,
-                right: 50,
-                bottom: 20,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 child: TiltParallax(
                   size: const Offset(20, 20),
                   child: Container(
                     child: Image.asset(
                       card['Immagine_personaggio'] ?? '',
-                      fit: BoxFit.contain,
-                      scale: 4.5,
                     ),
                   ),
                 ),

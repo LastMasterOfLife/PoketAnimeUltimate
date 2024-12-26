@@ -15,6 +15,25 @@ class CardVisual extends StatefulWidget {
 class _CardVisualState extends State<CardVisual> {
   List<Map<String, dynamic>> cards = [];
   late List<bool> visibility;
+  String buildBorder(String rarita) {
+    String path = "";
+
+    switch (rarita) {
+      case "Comune":
+        path = "assets/Border/comune.jpg";
+        break;
+      case "Rara":
+        path = "assets/Border/rare.jpg";
+        break;
+      case "UltraRara":
+        path = "assets/Border/gold.jpg";
+        break;
+      default:
+        path = "assets/Border/comune.jpg";
+    }
+
+    return path;
+  }
 
   Future<void> fetchCards() async {
     final url = Uri.parse('https://mocki.io/v1/0bb0c579-882e-4d78-96c6-c009179e2e13');
@@ -32,6 +51,7 @@ class _CardVisualState extends State<CardVisual> {
             'description': item['Descrizione'] ?? '',
             'background': item['Immagine_sfondo'] ?? '',
             'character': item['Immagine_personaggio'] ?? '',
+            'Rarety': item['Rarita'] ?? '',
             'abilities': item['abilities'] ?? '',
             'attack': item['attack'] ?? '',
             'defense': item['defense'] ?? '',
@@ -106,7 +126,7 @@ class _CardVisualState extends State<CardVisual> {
       height: 450,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(image: AssetImage('assets/Border/comune.jpg'),fit: BoxFit.cover),
+        image: DecorationImage(image: AssetImage(buildBorder(card['Rarety'])),fit: BoxFit.cover),
         /*
         gradient: const LinearGradient(
           colors: [Colors.yellow, Colors.orange], // Colori del gradiente
