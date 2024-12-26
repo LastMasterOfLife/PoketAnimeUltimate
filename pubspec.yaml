@@ -73,6 +73,8 @@ flutter:
      - assets/Border/
      - assets/KaisenPack/cards/comune/backgrounds/
      - assets/KaisenPack/cards/comune/characters/
+     - assets/KaisenPack/cards/rara/backgrounds/
+     - assets/KaisenPack/cards/rara/characters/
      - assets/3DPack/Jiujizu_Kaisen/
      - assets/3DPack/Mushoku_Tensei/
      - assets/Sfondi/
