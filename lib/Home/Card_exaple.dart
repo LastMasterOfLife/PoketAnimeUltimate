@@ -62,6 +62,27 @@ class _CardExampleState extends State<CardExample> {
     );
   }
 
+
+  String buildBorder(String rarita) {
+    String path = "";
+
+    switch (rarita) {
+      case "Comune":
+        path = "assets/Border/comune.jpg";
+        break;
+      case "Rara":
+        path = "assets/Border/rare.jpg";
+        break;
+      case "UltraRara":
+        path = "assets/Border/gold.jpg";
+        break;
+      default:
+        path = "assets/Border/comune.jpg";
+    }
+
+    return path;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,7 +142,7 @@ class _CardExampleState extends State<CardExample> {
         height: 450,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          image: const DecorationImage(image: AssetImage('assets/Border/comune.jpg'),fit: BoxFit.cover),
+          image:  DecorationImage(image: AssetImage(buildBorder(card['Rarita'])),fit: BoxFit.cover),
           /*
           gradient: const LinearGradient(
             colors: [Colors.yellow, Colors.orange], // Colori del gradiente
