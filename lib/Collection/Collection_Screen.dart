@@ -17,7 +17,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
   Future<void> fetchCards() async {
     final url = Uri.parse(
-        'https://mocki.io/v1/17864e41-b356-42d5-a6d3-234ffa123de6');
+        'https://mocki.io/v1/e1635e8e-c11a-48a5-b355-51bc60f10a12');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
