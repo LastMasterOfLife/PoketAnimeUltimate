@@ -2,6 +2,7 @@ import 'dart:convert'; // Per lavorare con JSON
 import 'package:flutter/material.dart';
 import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
+import 'package:poketanime/Componets/Card_Detail_Component.dart';
 
 class CardExample extends StatefulWidget {
   final int index;
@@ -105,7 +106,7 @@ class _CardExampleState extends State<CardExample> {
             children: [
               const SizedBox(height: 20),
               Center(
-                child: buildCard(card),
+                child: CardDetailComponent(card: card),
               ),
               // Nome
               Text(

@@ -7,6 +7,7 @@ import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
+import 'package:poketanime/PescaMistery/Pesca_Misterriosa_screen.dart';
 
 class SwitchPack extends StatefulWidget {
   const SwitchPack({super.key});
@@ -597,7 +598,7 @@ class _SwitchPackState extends State<SwitchPack> {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PescaMisteriosaScreen()));
                                 },
                                 child: Padding(
                                     padding: const EdgeInsets.symmetric(
