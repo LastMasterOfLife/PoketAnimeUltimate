@@ -27,11 +27,10 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
     super.initState();
     _selectedIndex = widget.index ?? 0;
     _isMenuOverlayVisible = false;
-    // Aggiungi le schermate dinamicamente nella lista
     _pages.add(const SwitchPack());
-    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [])); // Passa cardIds a CollectionScreen
-    _pages.add(CommunityScreen());
-    _pages.add(LotteScreen());
+    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? []));
+    _pages.add(const CommunityScreen());
+    _pages.add(const LotteScreen());
     _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible,));
   }
 
@@ -64,7 +63,7 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
             NavigationDestination(
               icon: AnimatedScale(
                 scale: _selectedIndex == 0 ? 1.5 : 1.0,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: const Icon(Icons.home_filled),
               ),
               label: "",
@@ -106,7 +105,7 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
               icon: AnimatedScale(
                 scale: _selectedIndex == 4 ? 1.5 : 1.0,
                 duration: const Duration(milliseconds: 200),
-                child: Icon(Icons.menu),
+                child: const Icon(Icons.menu),
               ),
               label: "",
             ),

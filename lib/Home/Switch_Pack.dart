@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Neu_box.dart';
-import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
 
@@ -24,7 +22,7 @@ class _SwitchPackState extends State<SwitchPack> {
     {'fileName': 'assets/img_pack/demon_slayer_pack.jpg'},
   ];
 
-  int _currentIndex = 1; // Traccia l'indice corrente della slide
+  int _currentIndex = 1;
 
   int _seconds = 30;
   late Timer _timer;
@@ -70,7 +68,8 @@ class _SwitchPackState extends State<SwitchPack> {
         }
       });
     });
-  }void _startTimer3() {
+  }
+  void _startTimer3() {
     _timer3 = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _seconds3--;
@@ -566,7 +565,7 @@ class _SwitchPackState extends State<SwitchPack> {
                               children: [
                                 InkWell(
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
                                     },
                                     child: Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -598,7 +597,7 @@ class _SwitchPackState extends State<SwitchPack> {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
                                 },
                                 child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -625,6 +624,8 @@ class _SwitchPackState extends State<SwitchPack> {
                   ),
                 )
               ],
-            )));
+            )
+        )
+    );
   }
 }
