@@ -5,7 +5,9 @@ class MissionComponent extends StatefulWidget {
   final String title;
   final String descrizione;
 
-  const MissionComponent({super.key, required this.title, required this.descrizione});
+  final bool block;
+
+  const MissionComponent({super.key, required this.title, required this.descrizione, required this.block});
 
   @override
   State<MissionComponent> createState() => _MissionComponentState();
@@ -20,11 +22,15 @@ class _MissionComponentState extends State<MissionComponent> {
         height: 160,
         decoration: BoxDecoration(
           color: secondary,
-          borderRadius: BorderRadius.all(Radius.circular(18)),
-          gradient: LinearGradient(
-              colors: [terziario,quaternario],
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
+          gradient: widget.block ? const LinearGradient(
+              colors: [primary,primary],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight
+          ) : const LinearGradient(
+              colors: [terziario,quaternario],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight
           ),
           border: Border.all(color: bianco,width: 2)
         ),
