@@ -184,7 +184,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 width: double.infinity,
                 height: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.black.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Icon(
@@ -192,12 +192,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   color: Colors.blue,
                   size: 35,
                 ),
-              ),
-            if (!locked && discovered)
-              const Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 30,
               ),
           ],
         ),

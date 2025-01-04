@@ -53,6 +53,10 @@ class _SceltascreenState extends State<Sceltascreen> {
 
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          //image: DecorationImage(image: AssetImage('assets/Sfondi/sfondo_pachetto.png')),
+          color: Color(0xFFCEC1FE),
+        ),
           child: Center(
             child: Container(
               child: Padding(
@@ -63,7 +67,7 @@ class _SceltascreenState extends State<Sceltascreen> {
                     initialPage: 6,
                     viewportFraction: 0.4,
                     enlargeCenterPage: true,
-                    enableInfiniteScroll: false,
+                    enableInfiniteScroll: true,
                     onPageChanged: (index, reason) {
                       setState(() {
                         _currentIndex = index;
