@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Collection/Collection_Screen.dart';
+import 'package:poketanime/Componets/Card_Component.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
 
 class RiassuntospaccettamentoScreen extends StatefulWidget {
@@ -19,20 +20,28 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
       appBar: AppBar(
         title: const Text('Riassunto Spaccettamento'),
       ),
-      body: ListView.builder(
+      body: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 4,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ),
         itemCount: widget.cards.length,
         itemBuilder: (context, index) {
           final card = widget.cards[index];
           return Card(
             margin: const EdgeInsets.all(10),
-            child: ListTile(
-              title: Text(card['fileName'] ?? 'Nome non disponibile'),  // Gestione nullabilità
-              subtitle: Text(card['description'] ?? 'Descrizione non disponibile'),  // Gestione nullabilità
-              leading: Image.asset(card['character'] ?? 'assets/default_character.png'),  // Gestione nullabilità
-              trailing: Image.asset(card['background'] ?? 'assets/default_background.png'),  // Gestione nullabilità
-            ),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: CardComponent( card: card),
+            )
           );
-        },
+        }
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

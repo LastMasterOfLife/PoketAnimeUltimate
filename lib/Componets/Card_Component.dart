@@ -33,14 +33,14 @@ class _CardComponentState extends State<CardComponent> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.card['type'] == 'Comune') {
+    if (widget.card['type'] == 'Comune' || widget.card['Rarety'] == 'Comune') {
       return Tilt(
         child: Container(
           width: 300,
           height: 450,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(image: AssetImage(buildBorder(widget.card['type'])),fit: BoxFit.cover),
+            image: DecorationImage(image: AssetImage(buildBorder(widget.card['type'] ?? widget.card['Rarety'])),fit: BoxFit.cover),
           ),
           child: Container(
             margin: const EdgeInsets.all(10), // Spazio per il bordo
@@ -55,7 +55,7 @@ class _CardComponentState extends State<CardComponent> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
-                      widget.card['image'],
+                      widget.card['image'] ?? widget.card['background'],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -72,7 +72,7 @@ class _CardComponentState extends State<CardComponent> {
         height: 450,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(image: AssetImage(buildBorder(widget.card['type'])),fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage(buildBorder(widget.card['type'] ?? widget.card['Rarety'])),fit: BoxFit.cover),
         ),
         child: Container(
           margin: const EdgeInsets.all(10), // Spazio per il bordo
@@ -87,7 +87,7 @@ class _CardComponentState extends State<CardComponent> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
-                    widget.card['image'],
+                    widget.card['image'] ?? widget.card['background'],
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -114,6 +114,5 @@ class _CardComponentState extends State<CardComponent> {
         ),
       ),
     );
-
   }
 }
