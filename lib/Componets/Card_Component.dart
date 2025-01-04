@@ -94,17 +94,16 @@ class _CardComponentState extends State<CardComponent> {
               ),
               // Immagine del personaggio
               Positioned(
-                top: 20,
-                left: 50,
-                right: 50,
-                bottom: 20,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 child: TiltParallax(
                   size: const Offset(20, 20),
                   child: Container(
                     child: Image.asset(
                       widget.card['character'],
-                      fit: BoxFit.contain,
-                      scale: 0.10,
+                      scale: 0.020,
                     ),
                   ),
                 ),

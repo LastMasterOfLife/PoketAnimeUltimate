@@ -9,9 +9,9 @@ class PescaComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(20),
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -23,11 +23,11 @@ class PescaComponent extends StatelessWidget {
             GridView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 3 / 4,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
               ),
               itemCount: carte.length,
               itemBuilder: (context, index) {

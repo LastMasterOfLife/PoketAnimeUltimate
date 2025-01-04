@@ -156,7 +156,7 @@ class _CardVisualState extends State<CardVisual> {
                   child: Center(
                     child: Text(
                       card['fileName'], // Nome del personaggio
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -215,7 +215,7 @@ class _CardVisualState extends State<CardVisual> {
                       Icon(Icons.bolt, color: Colors.yellow, size: 24),
                       Text(
                         "${card['energy']}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -258,17 +258,16 @@ class _CardVisualState extends State<CardVisual> {
               ),
               // Immagine del personaggio
               Positioned(
-                top: 20,
-                left: 50,
-                right: 50,
-                bottom: 20,
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
                 child: TiltParallax(
                   size: const Offset(20, 20),
                   child: Container(
                     child: Image.asset(
                       card['character'],
-                      fit: BoxFit.contain,
-                      scale: 4.5,
+                      scale: 0.05,
                     ),
                   ),
                 ),
@@ -281,7 +280,7 @@ class _CardVisualState extends State<CardVisual> {
                 child: Center(
                   child: Text(
                     card['fileName'], // Nome del personaggio
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -312,20 +311,20 @@ class _CardVisualState extends State<CardVisual> {
                     children: [
                       Text(
                         "Abilità: ${card['abilities']}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         "Attacco: ${card['attack']}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         "Difesa: ${card['defense']}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         "Velocità: ${card['speed']}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
@@ -337,10 +336,10 @@ class _CardVisualState extends State<CardVisual> {
                 right: 15,
                 child: Row(
                   children: [
-                    Icon(Icons.bolt, color: Colors.yellow, size: 24),
+                    const Icon(Icons.bolt, color: Colors.yellow, size: 24),
                     Text(
                       "${card['energy']}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

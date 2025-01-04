@@ -144,14 +144,6 @@ class _CardExampleState extends State<CardExample> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           image:  DecorationImage(image: AssetImage(buildBorder(card['Rarita'])),fit: BoxFit.cover),
-          /*
-          gradient: const LinearGradient(
-            colors: [Colors.yellow, Colors.orange], // Colori del gradiente
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-      
-           */
         ),
         child: Container(
           margin: const EdgeInsets.all(10), // Spazio per il bordo
@@ -182,6 +174,7 @@ class _CardExampleState extends State<CardExample> {
                   child: Container(
                     child: Image.asset(
                       card['Immagine_personaggio'] ?? '',
+                      scale: 0.05,
                     ),
                   ),
                 ),
@@ -225,20 +218,20 @@ class _CardExampleState extends State<CardExample> {
                     children: [
                       Text(
                         "Abilità: ${card['abilities'] ?? ''}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text(
                         "Attacco: ${card['attack'] ?? ''}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         "Difesa: ${card['defense'] ?? ''}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         "Velocità: ${card['speed'] ?? ''}",
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ],
                   ),
