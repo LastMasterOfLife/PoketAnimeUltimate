@@ -1,6 +1,5 @@
 import 'dart:convert'; // Per lavorare con JSON
 import 'package:flutter/material.dart';
-import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Card_Detail_Component.dart';
@@ -21,6 +20,14 @@ class _CardExampleState extends State<CardExample> {
   void initState() {
     super.initState();
     cardData = fetchCardData(widget.index);
+
+    // Mostra la modale automaticamente quando la pagina viene creata
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final card = await cardData; // Aspettiamo che i dati vengano caricati
+      if (mounted) {
+        showCardModal(card);
+      }
+    });
   }
 
   // Funzione per ottenere i dati della carta specifica
@@ -61,7 +68,7 @@ class _CardExampleState extends State<CardExample> {
 
     return List.generate(
       starCount,
-      (index) => const Icon(
+          (index) => const Icon(
         Icons.star,
         color: Colors.amber,
         size: 24,
@@ -69,17 +76,103 @@ class _CardExampleState extends State<CardExample> {
     );
   }
 
-  String buildBorder(String rarita) {
-    switch (rarita) {
-      case "Comune":
-        return "assets/Border/comune.jpg";
-      case "Rara":
-        return "assets/Border/rare.jpg";
-      case "UltraRara":
-        return "assets/Border/gold.jpg";
-      default:
-        return "assets/Border/comune.jpg";
-    }
+  void showCardModal(Map<String, dynamic> card) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false, // Impedisce che la modale scompaia completamente
+      enableDrag: true, // Permette di trascinare la modale
+      backgroundColor: Colors.transparent,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.5, // Altezza iniziale della modale
+        minChildSize: 0.3, // Altezza minima: rimane visibile
+        maxChildSize: 0.8, // Altezza massima
+        builder: (_, controller) => Container(
+          decoration: BoxDecoration(
+            color: primary,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: SingleChildScrollView(
+            controller: controller,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  Center(
+                    child: Container(
+                      width: 50,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    card['Nome'] ?? 'Sconosciuto',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: buildStars(card['Rarita'] ?? ''),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Descrizione: ${card['Descrizione'] ?? ''}",
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Abilità: ${card['abilities'] ?? ''}",
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Attacco: ${card['attack'] ?? ''}",
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Difesa: ${card['defense'] ?? ''}",
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Velocità: ${card['speed'] ?? ''}",
+                    style: const TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      const Icon(Icons.bolt, color: Colors.yellow, size: 24),
+                      Text(
+                        "${card['energy']}",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -100,108 +193,17 @@ class _CardExampleState extends State<CardExample> {
           }
 
           final card = snapshot.data!;
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Center(
+          return Stack(
+            children: [
+              Positioned(
+                top: 50,
+                left: 0,
+                right: 0,
+                child: Center(
                   child: CardDetailComponent(card: card),
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 270,
-                  width: 350,
-                  decoration: BoxDecoration(
-                      color: primary,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        Text(
-                          card['Nome'] ?? 'Sconosciuto',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: buildStars(card['Rarita'] ?? ''),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: bianco.withOpacity(0.7),
-                              borderRadius: BorderRadius.all(Radius.circular(15))
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      card['Descrizione'] ?? '',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 16,color: grigio),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-
-                                  Text(
-                                    "Abilità: ${card['abilities'] ?? ''}",
-                                    style: const TextStyle(
-                                        fontSize: 16, fontWeight: FontWeight.bold,color: grigio),
-                                  ),
-
-                                  const SizedBox(height: 20),
-
-                                  Text("Attacco: ${card['attack'] ?? ''}",
-                                      style: const TextStyle(fontSize: 16,color: grigio)),
-
-                                  const SizedBox(height: 20),
-
-                                  Text("Difesa: ${card['defense'] ?? ''}",
-                                      style: const TextStyle(fontSize: 16,color: grigio)),
-
-                                  const SizedBox(height: 20),
-
-                                  Text("Velocità: ${card['speed'] ?? ''}",
-                                      style: const TextStyle(fontSize: 16 ,color: grigio)),
-
-                                  const SizedBox(height: 20),
-
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.bolt, color: Colors.yellow, size: 24),
-                                      Text(
-                                        "${card['energy']}",
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: grigio,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  const SizedBox(height: 20),
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
+              ),
+            ],
           );
         },
       ),
