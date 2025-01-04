@@ -24,21 +24,23 @@ class _CardExampleState extends State<CardExample> {
   // Funzione per ottenere i dati della carta specifica
   Future<Map<String, dynamic>> fetchCardData(int id) async {
     const String apiUrl = "https://mocki.io/v1/e1635e8e-c11a-48a5-b355-51bc60f10a12";
-    final response = await http.get(Uri.parse(apiUrl));
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final cards = data['cards'] as List;
-      return cards.firstWhere((card) => card['Id'] == id, orElse: () => throw Exception("Carta non trovata"));
-    } else {
-      throw Exception("Errore durante la richiesta: ${response.statusCode}");
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final cards = data['cards'] as List;
+        return cards.firstWhere((card) => card['Id'] == id, orElse: () => throw Exception("Carta non trovata"));
+      } else {
+        throw Exception("Errore durante la richiesta: ${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("Errore durante il fetch dei dati: $e");
     }
   }
 
-
   List<Widget> buildStars(String rarita) {
-    int starCount = 0;
-
+    int starCount;
     switch (rarita) {
       case "Comune":
         starCount = 1;
@@ -63,25 +65,17 @@ class _CardExampleState extends State<CardExample> {
     );
   }
 
-
   String buildBorder(String rarita) {
-    String path = "";
-
     switch (rarita) {
       case "Comune":
-        path = "assets/Border/comune.jpg";
-        break;
+        return "assets/Border/comune.jpg";
       case "Rara":
-        path = "assets/Border/rare.jpg";
-        break;
+        return "assets/Border/rare.jpg";
       case "UltraRara":
-        path = "assets/Border/gold.jpg";
-        break;
+        return "assets/Border/gold.jpg";
       default:
-        path = "assets/Border/comune.jpg";
+        return "assets/Border/comune.jpg";
     }
-
-    return path;
   }
 
   @override
@@ -102,34 +96,34 @@ class _CardExampleState extends State<CardExample> {
           }
 
           final card = snapshot.data!;
-          return Column(
-            children: [
-              const SizedBox(height: 20),
-              Center(
-                child: CardDetailComponent(card: card),
-              ),
-              // Nome
-              Text(
-                card['Nome'] ?? 'Sconosciuto',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-              ),
-              const SizedBox(height: 10),
-              // Rarità con stelle
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: buildStars(card['Rarita'] ?? ''),
-              ),
-              const SizedBox(height: 10),
-              // Descrizione
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  card['Descrizione'] ?? '',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16),
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                Center(
+                  child: CardDetailComponent(card: card),
                 ),
-              ),
-            ],
+                const SizedBox(height: 10),
+                Text(
+                  card['Nome'] ?? 'Sconosciuto',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: buildStars(card['Rarita'] ?? ''),
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    card['Descrizione'] ?? '',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -143,7 +137,10 @@ class _CardExampleState extends State<CardExample> {
         height: 450,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          image:  DecorationImage(image: AssetImage(buildBorder(card['Rarita'])),fit: BoxFit.cover),
+          image: DecorationImage(
+            image: AssetImage(buildBorder(card['Rarita'])),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Container(
           margin: const EdgeInsets.all(10), // Spazio per il bordo
@@ -153,7 +150,6 @@ class _CardExampleState extends State<CardExample> {
           ),
           child: Stack(
             children: [
-              // Sfondo della carta
               Positioned.fill(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -163,7 +159,6 @@ class _CardExampleState extends State<CardExample> {
                   ),
                 ),
               ),
-              // Immagine del personaggio
               Positioned(
                 top: 0,
                 left: 0,
@@ -171,22 +166,19 @@ class _CardExampleState extends State<CardExample> {
                 bottom: 0,
                 child: TiltParallax(
                   size: const Offset(20, 20),
-                  child: Container(
-                    child: Image.asset(
-                      card['Immagine_personaggio'] ?? '',
-                      scale: 0.05,
-                    ),
+                  child: Image.asset(
+                    card['Immagine_personaggio'] ?? '',
+                    scale: 0.05,
                   ),
                 ),
               ),
-              // Nome del personaggio
               Positioned(
                 top: 10,
                 left: 15,
                 right: 15,
                 child: Center(
                   child: Text(
-                    card['Nome'] ?? '', // Nome del personaggio
+                    card['Nome'] ?? '',
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -202,7 +194,6 @@ class _CardExampleState extends State<CardExample> {
                   ),
                 ),
               ),
-              // Statistiche
               Positioned(
                 bottom: 40,
                 left: 15,
@@ -221,23 +212,13 @@ class _CardExampleState extends State<CardExample> {
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 5),
-                      Text(
-                        "Attacco: ${card['attack'] ?? ''}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "Difesa: ${card['defense'] ?? ''}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "Velocità: ${card['speed'] ?? ''}",
-                        style: const TextStyle(fontSize: 16),
-                      ),
+                      Text("Attacco: ${card['attack'] ?? ''}", style: const TextStyle(fontSize: 16)),
+                      Text("Difesa: ${card['defense'] ?? ''}", style: const TextStyle(fontSize: 16)),
+                      Text("Velocità: ${card['speed'] ?? ''}", style: const TextStyle(fontSize: 16)),
                     ],
                   ),
                 ),
               ),
-              // Energia in basso
               Positioned(
                 bottom: 10,
                 right: 15,
