@@ -13,6 +13,12 @@ class CollectionScreen extends StatefulWidget {
 }
 
 class _CollectionScreenState extends State<CollectionScreen> {
+
+  int selectedIndex = 0;
+  bool kaisen = true;
+  bool mushoku = false;
+  bool demon = false;
+  
   List<Map<String, dynamic>> items = [];
   bool isLoading = true;
   String searchQuery = "";
@@ -49,6 +55,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
   void initState() {
     super.initState();
     fetchCards();
+    selectedIndex = 0;
+    kaisen = true;
+    mushoku = false;
+    demon = false;
   }
 
   @override
@@ -90,6 +100,90 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 ),
                 filled: true,
                 fillColor: primary,
+              ),
+            ),
+          ),
+          SizedBox(height: 10,),
+          Container(
+            height: 80,
+            width: double.infinity,
+            decoration: const BoxDecoration(color: Colors.transparent),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        fetchCards();
+                        setState(() {
+                          selectedIndex = 0;
+                          if (!kaisen) {
+                            kaisen = !kaisen;
+                          }
+                          mushoku = false;
+                          demon = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: kaisen ? terziario.withOpacity(0.9) : Colors.white,
+                        elevation: 8,
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(' Jiujizu Kaisen'),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 1;
+                          if (!mushoku) {
+                            mushoku = !mushoku;
+                          }
+                          kaisen = false;
+                          demon = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: mushoku ? terziario.withOpacity(0.9) : Colors.white,
+                          elevation: 8
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Mushoku Tensei'),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 2;
+                          if (!demon) {
+                            demon = !demon;
+                          }
+                          kaisen = false;
+                          mushoku = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: demon ? terziario.withOpacity(0.9) : Colors.white,
+                          elevation: 8
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Demon Slayer'),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
               ),
             ),
           ),
@@ -153,7 +247,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 }
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
                 child: imagePath.startsWith('http')
                     ? Image.network(
                   imagePath,
