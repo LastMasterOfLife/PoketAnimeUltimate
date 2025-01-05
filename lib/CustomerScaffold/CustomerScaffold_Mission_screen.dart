@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Mission/Cardex_screen.dart';
 import 'package:poketanime/Mission/Giornaliere_screen.dart';
 
 class CustomerscaffoldMissionScreen extends StatefulWidget {
@@ -20,7 +21,6 @@ class _CustomerscaffoldMissionScreenState
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
      selectedIndex = 0;
      gionaliero = true;
@@ -31,7 +31,7 @@ class _CustomerscaffoldMissionScreenState
 
   final List<Widget> pages = [
     GiornaliereScreen(),
-    Center(child: Text("Pagina 2", style: TextStyle(fontSize: 24))),
+    CardexScreen(),
     Center(child: Text("Pagina 3", style: TextStyle(fontSize: 24))),
     Center(child: Text("Pagina 4", style: TextStyle(fontSize: 24))),
   ];

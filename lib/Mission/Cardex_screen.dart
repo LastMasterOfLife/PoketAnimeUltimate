@@ -1,19 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:poketanime/Componets/Mission_component.dart';
-import 'package:poketanime/colors.dart'; // Assicurati che il nome sia corretto
 import 'dart:convert';
-class GiornaliereScreen extends StatefulWidget {
-  const GiornaliereScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Componets/Mission_component.dart';
+import 'package:http/http.dart' as http;
+
+class CardexScreen extends StatefulWidget {
+  const CardexScreen({super.key});
 
   @override
-  State<GiornaliereScreen> createState() => _GiornaliereScreenState();
+  State<CardexScreen> createState() => _CardexScreenState();
 }
 
-class _GiornaliereScreenState extends State<GiornaliereScreen> {
+class _CardexScreenState extends State<CardexScreen> {
   List<Map<String, String>> missions = [];
   List<bool> hiddenFlags = [];
-  double _progress = 0.01;
   bool block = false; // block = false  ancora da completare
   int tapCount = 0;
 
@@ -23,19 +23,9 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
     fetchMissions();
   }
 
-  void _updateProgress() {
-    setState(() {
-      if (_progress < 1.0) {
-        _progress += 0.2; // Incremento del 20%
-        if (_progress > 1.0) {
-          _progress = 1.0;
-        }
-      }
-    });
-  }
 
   Future<void> fetchMissions() async {
-    final url = Uri.parse('https://mocki.io/v1/449ef0a3-60a5-4ab4-82b4-11cd6f3eca5d');
+    final url = Uri.parse('https://mocki.io/v1/dab367f7-bed4-43dd-a0a3-0400b872a216');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
@@ -47,6 +37,8 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
                 .map((item) => {
               'title': item['title'] as String,
               'descrizione': item['Descrizione'] as String,
+              'riconpensa': item['riconpensa'] as String,
+              'num': item['num'] as String
             })
                 .toList();
             hiddenFlags = List<bool>.filled(missions.length, false);
@@ -78,23 +70,6 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      child: LinearProgressIndicator(
-                        value: _progress,
-                        backgroundColor: Colors.grey[300],
-                        color: quaternario,
-                        minHeight: 10,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ),
             Container(
               height: 50,
@@ -105,7 +80,7 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
               child: tapCount >= missions.length
                   ? const Center(
                 child: Text(
-                  'Non ci sono più missioni!',
+                  'Non ci sono più missioni Cardex!',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -130,7 +105,6 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
                           setState(() {
                             hiddenFlags[index] = true;
                             tapCount++;
-                            _updateProgress();
                           });
                         }
                       },
@@ -138,7 +112,9 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
                         title: mission['title']!,
                         descrizione: mission['descrizione']!,
                         block: block,
-                        index: 0,
+                        index: 1,
+                        riconpensa: mission['riconpensa'],
+                        num: mission['num'],
                       ),
                     ),
                   );

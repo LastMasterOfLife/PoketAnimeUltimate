@@ -85,7 +85,7 @@ class _CardExampleState extends State<CardExample> {
       backgroundColor: Colors.transparent,
       builder: (context) => DraggableScrollableSheet(
         initialChildSize: 0.5, // Altezza iniziale della modale
-        minChildSize: 0.3, // Altezza minima: rimane visibile
+        minChildSize: 0.1, // Altezza minima: rimane visibile
         maxChildSize: 0.8, // Altezza massima
         builder: (_, controller) => Container(
           decoration: BoxDecoration(

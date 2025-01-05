@@ -175,7 +175,7 @@ class _SwitchPackState extends State<SwitchPack> {
                         angle: 18 * pi/180,
                         child: Container(
                             child: Image.asset(
-                          'assets/icons/cless_icon.png',
+                          'assets/icons/consumabili/cless_icon.png',
                           scale: 10,
                         )),
                       )
