@@ -36,7 +36,7 @@ class _CardVisualState extends State<CardVisual> {
   }
 
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/e1635e8e-c11a-48a5-b355-51bc60f10a12');
+    final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

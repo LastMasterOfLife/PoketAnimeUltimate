@@ -20,7 +20,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
   Future<void> _caricaCarte() async {
     for (int i = 0; i < 5; i++) {
       try {
-        final response = await http.get(Uri.parse('https://mocki.io/v1/e1635e8e-c11a-48a5-b355-51bc60f10a12'));
+        final response = await http.get(Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff'));
         if (response.statusCode == 200) {
           final Map<String, dynamic> data = json.decode(response.body);
           final List<dynamic> cardsList = data['cards'] ?? []; // Default to empty list if null

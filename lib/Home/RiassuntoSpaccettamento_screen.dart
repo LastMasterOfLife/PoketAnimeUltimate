@@ -21,8 +21,8 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
         title: const Text('Riassunto Spaccettamento'),
       ),
       body: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 4,
           crossAxisSpacing: 10,

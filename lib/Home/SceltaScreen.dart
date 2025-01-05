@@ -53,7 +53,7 @@ class _SceltascreenState extends State<Sceltascreen> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           //image: DecorationImage(image: AssetImage('assets/Sfondi/sfondo_pachetto.png')),
           color: Color(0xFFCEC1FE),
         ),

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
+import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +19,29 @@ class SwitchPack extends StatefulWidget {
 }
 
 class _SwitchPackState extends State<SwitchPack> {
-  final List<Map<String, String>> objects = [
-    {'fileName': 'assets/img_pack/mushoku_tensei_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/demon_slayer_pack.jpg'},
-  ];
+   List<Map<String, dynamic>> objects = [];
 
-  int _currentIndex = 1;
+  Future<void> fetchCards() async {
+    final url = Uri.parse('https://mocki.io/v1/e331d864-b3ed-4c52-b5fc-a5cd044b823a');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      setState(() {
+        final cardsList = data['pack'] as List<dynamic>;
+        objects = cardsList.take(100).map((item) {
+          return {
+            'id': item['Id'] ?? '',
+            'path': item['path'] ?? '',
+          };
+        }).toList();
+      });
+    } else {
+      throw Exception('Errore nel recupero delle carte');
+    }
+  }
+
+  int _currentIndex = 2;
 
   int _seconds = 30;
   late Timer _timer;
@@ -41,7 +59,9 @@ class _SwitchPackState extends State<SwitchPack> {
   void initState() {
     super.initState();
     _startTimer();
+    fetchCards();
   }
+
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -185,7 +205,6 @@ class _SwitchPackState extends State<SwitchPack> {
                 const SizedBox(
                   height: 10,
                 ),
-                // Carousel
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Container(
@@ -213,7 +232,7 @@ class _SwitchPackState extends State<SwitchPack> {
                               initialPage: 1,
                               viewportFraction: 0.3,
                               enlargeCenterPage: true,
-                              enableInfiniteScroll: false,
+                              enableInfiniteScroll: true,
                               onPageChanged: (index, reason) {
                                 setState(() {
                                   _currentIndex = index;
@@ -228,28 +247,22 @@ class _SwitchPackState extends State<SwitchPack> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    child: Container(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (contex) =>
-                                                        Homescreen(
-                                                            index:
-                                                                _currentIndex)));
-                                          },
-                                          child: Image.asset(
-                                            object['fileName']!,
-                                            fit: BoxFit.contain,
-                                            errorBuilder:
-                                                (context, error, stackTrace) =>
-                                                    const Center(
-                                              child: Icon(Icons.error,
-                                                  color: Colors.red),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (contex) => Homescreen(index: _currentIndex),
                                             ),
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          object['path']!,
+                                          fit: BoxFit.contain,
+                                          errorBuilder: (context, error, stackTrace) => const Center(
+                                            child: Icon(Icons.error, color: Colors.red),
                                           ),
                                         ),
                                       ),
