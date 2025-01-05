@@ -23,9 +23,14 @@ class _CardExampleState extends State<CardExample> {
 
     // Mostra la modale automaticamente quando la pagina viene creata
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final card = await cardData; // Aspettiamo che i dati vengano caricati
-      if (mounted) {
-        showCardModal(card);
+      try {
+        final card = await cardData;
+        if (mounted) {
+          showCardModal(card);
+        }
+      } catch (e) {
+        // Gestione dell'errore durante il caricamento della modale
+        debugPrint("Errore durante la visualizzazione della modale: $e");
       }
     });
   }
@@ -80,20 +85,21 @@ class _CardExampleState extends State<CardExample> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      isDismissible: false, // Impedisce che la modale scompaia completamente
-      enableDrag: true, // Permette di trascinare la modale
+      isDismissible: true,
+      enableDrag: true,
       backgroundColor: Colors.transparent,
       builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.5, // Altezza iniziale della modale
-        minChildSize: 0.1, // Altezza minima: rimane visibile
-        maxChildSize: 0.8, // Altezza massima
+        initialChildSize: 0.5,
+        minChildSize: 0.1,
+        maxChildSize: 0.8,
         builder: (_, controller) => Container(
-          decoration: BoxDecoration(
+          decoration:  BoxDecoration(
             color: primary,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
+            border: Border.symmetric(horizontal: BorderSide(color: Colors.blue.shade900, width: 5))
           ),
           child: SingleChildScrollView(
             controller: controller,
@@ -166,6 +172,8 @@ class _CardExampleState extends State<CardExample> {
                       ),
                     ],
                   ),
+
+
                 ],
               ),
             ),
@@ -201,6 +209,39 @@ class _CardExampleState extends State<CardExample> {
                 right: 0,
                 child: Center(
                   child: CardDetailComponent(card: card),
+                ),
+              ),
+              Positioned(
+                bottom: 1,
+                left: 0,
+                right: 0,
+                child: InkWell(
+                  onTap: () async {
+                    try {
+                      final card = await cardData;
+                      if (mounted) {
+                        showCardModal(card);
+                      }
+                    } catch (e) {
+                      debugPrint("Errore durante il caricamento della modale: $e");
+                    }
+                  },
+                  child: Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: primary.withOpacity(0.9),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20)
+                      ),
+                      border: Border.symmetric(horizontal: BorderSide(color: Colors.blue.shade900,width: 5))
+                    ),
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "Mostra Dettagli",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
             ],
