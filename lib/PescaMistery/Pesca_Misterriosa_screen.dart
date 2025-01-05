@@ -23,7 +23,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
         final response = await http.get(Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff'));
         if (response.statusCode == 200) {
           final Map<String, dynamic> data = json.decode(response.body);
-          final List<dynamic> cardsList = data['cards'] ?? []; // Default to empty list if null
+          final List<dynamic> cardsList = data['cards'] ?? [];
           cardsList.shuffle();
 
           setState(() {

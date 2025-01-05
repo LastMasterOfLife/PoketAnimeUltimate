@@ -14,7 +14,7 @@ class CardexScreen extends StatefulWidget {
 class _CardexScreenState extends State<CardexScreen> {
   List<Map<String, String>> missions = [];
   List<bool> hiddenFlags = [];
-  bool block = false; // bl     ock = false  ancora da completare
+  bool block = false; // block = false  ancora da completare
   int tapCount = 0;
 
   @override
@@ -25,7 +25,7 @@ class _CardexScreenState extends State<CardexScreen> {
 
 
   Future<void> fetchMissions() async {
-    final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+    final url = Uri.parse('https://mocki.io/v1/9d5445e2-c2a6-496c-b41b-752eff095a0f');
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
