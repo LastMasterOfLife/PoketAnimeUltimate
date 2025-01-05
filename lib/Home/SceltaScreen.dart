@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:math';
+import 'package:http/http.dart' as http;
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/Card_Visual.dart';
 import 'package:poketanime/Home/Card_exaple.dart';
@@ -7,14 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Sceltascreen extends StatefulWidget {
-  const Sceltascreen({super.key});
+
+  final int index;
+  const Sceltascreen({super.key, required this.index});
 
   @override
   State<Sceltascreen> createState() => _SceltascreenState();
 }
 
 class _SceltascreenState extends State<Sceltascreen> {
-  final List<Map<String, String>> objects = [
+   List<Map<String, dynamic>> objects = [
+     /*
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
@@ -26,8 +31,15 @@ class _SceltascreenState extends State<Sceltascreen> {
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
     {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
+
+      */
   ];
 
+   @override
+  void initState() {
+    super.initState();
+    scelta(widget.index);
+  }
 
   int _currentIndex = 6; // Traccia l'indice corrente della slide
 
@@ -46,7 +58,33 @@ class _SceltascreenState extends State<Sceltascreen> {
   }
 
 
-  @override
+   void scelta(int index) {
+     switch (index) {
+       case 0:
+         for (int i = 0; i < 20; i++) {
+           objects.add({'fileName': 'assets/img_pack/mushoku_tensei_pack.jpg'});
+         }
+         break;
+       case 1:
+         for (int i = 0; i < 20; i++) {
+           objects.add({'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'});
+         }
+         break;
+       case 2:
+         for (int i = 0; i < 20; i++) {
+           objects.add({'fileName': 'assets/img_pack/demon_slayer_pack.jpg'});
+         }
+         break;
+       default:
+         for (int i = 0; i < 20; i++) {
+           objects.add({'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'});
+         }
+         break;
+     }
+   }
+
+
+   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;

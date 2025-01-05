@@ -41,7 +41,7 @@ class _SwitchPackState extends State<SwitchPack> {
     }
   }
 
-  int _currentIndex = 2;
+  int _currentIndex = 1;
 
   int _seconds = 30;
   late Timer _timer;

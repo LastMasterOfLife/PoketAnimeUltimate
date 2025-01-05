@@ -89,7 +89,7 @@ class _HomescreenState extends State<Homescreen> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Sceltascreen(),
+                          builder: (context) => Sceltascreen(index: widget.index,),
                         ),
                       ),
                       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
