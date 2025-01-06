@@ -29,7 +29,7 @@ class _HomescreenState extends State<Homescreen> {
       'scale': math.Vector3(6, 6, 6),
     },
     {
-      'fileName': 'assets/pacchetto_Demon_Slayer.obj',
+      'fileName': 'assets/3DPack/Demon_Slayer/Demon.obj',
       'rotation': math.Vector3(0, -90, 0),
       'scale': math.Vector3(6, 6, 6),
     },
