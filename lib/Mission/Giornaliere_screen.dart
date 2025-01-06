@@ -74,7 +74,7 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
               height: 200,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/Sfondi/sky_g.jpg'),
+                  image: AssetImage('assets/Sfondi/sky_giornaliere.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
