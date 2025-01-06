@@ -76,35 +76,4 @@ class CartaComponent extends StatelessWidget {
       child: CardComponent( card: carta),
     );
   }
-  Widget buildCard(Map<String, dynamic> card) {
-    return Container(
-      width: 300,
-      height: 450,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(image: AssetImage(buildBorder(card['type'])),fit: BoxFit.cover),
-      ),
-      child: Container(
-        margin: const EdgeInsets.all(10), // Spazio per il bordo
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.transparent,
-        ),
-        child: Stack(
-          children: [
-            // Sfondo della carta
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
-                  card['image'],
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

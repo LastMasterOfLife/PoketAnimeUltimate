@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poketanime/Componets/Pesca_Component.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:poketanime/PescaMistery/Mescolamento_screen.dart';
 
 class PescaMisteriosaScreen extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
             listaPescate.add(
               cardsList.take(4).map((carta) {
                 return {
+                  "id" : carta['Id'] ?? "",
                   "name": carta['Nome'] ?? "Nome sconosciuto",
                   "image": carta['Immagine_sfondo'] ?? "https://via.placeholder.com/150", // Placeholder image
                   "type": carta['Rarita'] ?? "Comune",
@@ -61,7 +63,11 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
       body: ListView.builder(
         itemCount: listaPescate.length,
         itemBuilder: (context, index) {
-          return PescaComponent(carte: listaPescate[index]);
+          return InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MescolamentoScreen(pesca: listaPescate[index])));
+            },
+              child: PescaComponent(carte: listaPescate[index]));
         },
       ),
     );
