@@ -10,6 +10,7 @@ import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
 import 'package:poketanime/PescaMistery/Pesca_Misterriosa_screen.dart';
+import 'package:poketanime/Vetrina/Vetrina_screen.dart';
 
 class SwitchPack extends StatefulWidget {
   const SwitchPack({super.key});
@@ -126,40 +127,45 @@ class _SwitchPackState extends State<SwitchPack> {
                       const SizedBox(
                         width: 0,
                       ),
-                      Container(
-                        width: 100,
-                        height: 70,
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.transparent,
-                                  blurRadius: 10,
-                                  spreadRadius: 1,
-                                  offset: Offset(5, 5))
-                            ],
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(15),
-                                topLeft: Radius.circular(0),
-                                bottomLeft: Radius.circular(0),
-                                bottomRight: Radius.circular(15))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 90,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: secondary,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(2)),
-                                    border:
-                                        Border.all(color: terziario, width: 1)),
-                              ),
-                            ],
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>VetrinaScreen()));
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 70,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: const BoxDecoration(
+                              color: Colors.transparent,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.transparent,
+                                    blurRadius: 10,
+                                    spreadRadius: 1,
+                                    offset: Offset(5, 5))
+                              ],
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(0),
+                                  bottomLeft: Radius.circular(0),
+                                  bottomRight: Radius.circular(15))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 90,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                      color: secondary,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(2)),
+                                      border:
+                                          Border.all(color: terziario, width: 1)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
