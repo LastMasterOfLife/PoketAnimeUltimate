@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/Card_exaple.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CollectionScreen extends StatefulWidget {
   final List<dynamic>? cardIds;
@@ -13,20 +13,26 @@ class CollectionScreen extends StatefulWidget {
 }
 
 class _CollectionScreenState extends State<CollectionScreen> {
-
+  late SharedPreferences prefs;
   int selectedIndex = 0;
-  bool kaisen = true;
-  bool mushoku = false;
-  bool demon = false;
-  
   List<Map<String, dynamic>> items = [];
   bool isLoading = true;
-  String searchQuery = "";
   final TextEditingController searchController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _initSharedPreferences();
+  }
+
+  Future<void> _initSharedPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    await fetchCards();
+    _loadSavedCardIds();
+  }
+
   Future<void> fetchCards() async {
-    final url = Uri.parse(
-        'https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+    final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
@@ -34,31 +40,46 @@ class _CollectionScreenState extends State<CollectionScreen> {
       setState(() {
         items = cardsList.map((item) {
           final itemId = item['Id'].toString();
-          final isDiscovered = widget.cardIds?.contains(itemId) ?? false;
-          final isLocked = !isDiscovered;
           return {
             'id': itemId,
             'name': item['Name'] ?? '',
             'image': item['Immagine_sfondo'] ?? '',
-            'locked': isLocked,
-            'discovered': isDiscovered,
+            'locked': true, // Tutte bloccate di default
+            'discovered': false,
           };
         }).toList();
         isLoading = false;
       });
+      _unlockSavedCards();
     } else {
       throw Exception('Errore nel recupero delle carte');
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fetchCards();
-    selectedIndex = 0;
-    kaisen = true;
-    mushoku = false;
-    demon = false;
+  Future<void> _saveCardId(String cardId) async {
+    List<String> savedCardIds = prefs.getStringList('savedCardIds') ?? [];
+    if (!savedCardIds.contains(cardId)) {
+      savedCardIds.add(cardId);
+      await prefs.setStringList('savedCardIds', savedCardIds);
+    }
+  }
+
+  void _loadSavedCardIds() {
+    List<String> savedCardIds = prefs.getStringList('savedCardIds') ?? [];
+    for (var item in items) {
+      if (savedCardIds.contains(item['id'])) {
+        item['locked'] = false;
+        item['discovered'] = true;
+      }
+    }
+    setState(() {});
+  }
+
+  void _unlockSavedCards() {
+    widget.cardIds?.forEach((cardId) async {
+      await _saveCardId(cardId.toString());
+    });
+    _loadSavedCardIds();
   }
 
   @override
@@ -66,13 +87,11 @@ class _CollectionScreenState extends State<CollectionScreen> {
     const double itemHeight = 50.0;
     const double itemWidth = 30.0;
 
-    List<Map<String, dynamic>> filteredItems = items.where((item) => item['name'].toLowerCase().trim().contains(searchController.text.toLowerCase().trim())).toList();
-
-    print('Items caricati: $items');
-
-    print('Query di ricerca: ${searchController.text}');
-    print('Items filtrati: $filteredItems');
-
+    List<Map<String, dynamic>> filteredItems = items.where((item) =>
+        item['name']
+            .toLowerCase()
+            .trim()
+            .contains(searchController.text.toLowerCase().trim())).toList();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -80,7 +99,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Column(
         children: [
-          const SizedBox(height: 50,),
+          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
@@ -92,101 +111,17 @@ class _CollectionScreenState extends State<CollectionScreen> {
               controller: searchController,
               decoration: InputDecoration(
                 hintText: 'Cerca un personaggio...',
-                hintStyle: TextStyle(color: bianco),
                 suffixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.0),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: primary,
+                fillColor: Colors.grey[300],
               ),
             ),
           ),
-          SizedBox(height: 10,),
-          Container(
-            height: 80,
-            width: double.infinity,
-            decoration: const BoxDecoration(color: Colors.transparent),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        fetchCards();
-                        setState(() {
-                          selectedIndex = 0;
-                          if (!kaisen) {
-                            kaisen = !kaisen;
-                          }
-                          mushoku = false;
-                          demon = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: kaisen ? terziario.withOpacity(0.9) : Colors.white,
-                        elevation: 8,
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(' Jiujizu Kaisen'),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex = 1;
-                          if (!mushoku) {
-                            mushoku = !mushoku;
-                          }
-                          kaisen = false;
-                          demon = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: mushoku ? terziario.withOpacity(0.9) : Colors.white,
-                          elevation: 8
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Mushoku Tensei'),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex = 2;
-                          if (!demon) {
-                            demon = !demon;
-                          }
-                          kaisen = false;
-                          mushoku = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: demon ? terziario.withOpacity(0.9) : Colors.white,
-                          elevation: 8
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Demon Slayer'),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const SizedBox(height: 10),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -200,10 +135,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 itemCount: filteredItems.length,
                 itemBuilder: (context, index) {
                   final item = filteredItems[index];
-
-                  print('Card IDs passed: ${widget.cardIds}');
-                  print('Current card ID: ${item['id']}');
-
                   return gridItem(
                     item['image'],
                     item['locked'],
@@ -221,7 +152,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
     );
   }
 
-
   Widget gridItem(String imagePath, bool locked, bool discovered, double height,
       double width, int index) {
     return SizedBox(
@@ -238,12 +168,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             InkWell(
               onTap: () {
                 if (!locked && discovered) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CardExample(index: index),
-                    ),
-                  );
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index)));
                 }
               },
               child: ClipRRect(

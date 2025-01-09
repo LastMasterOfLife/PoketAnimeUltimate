@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poketanime/Collection/Collection_Screen.dart';
 import 'package:poketanime/Componets/Card_Component.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RiassuntospaccettamentoScreen extends StatefulWidget {
   final List<Map<String, dynamic>> cards;
@@ -14,6 +15,33 @@ class RiassuntospaccettamentoScreen extends StatefulWidget {
 }
 
 class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoScreen> {
+
+  late SharedPreferences prefs; // Dichiarazione senza inizializzare
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initPrefs();
+  }
+
+  Future<void> _initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> _saveCardIds() async {
+    // Estrai gli ID delle carte e convertirli in stringhe
+    final cardIds = widget.cards.map<String>((card) {
+      var id = card['id'];
+      return id is int ? id.toString() : id; // Converte id a stringa se necessario
+    }).toList();
+
+    // Salva l'elenco degli ID come una stringa JSON nelle SharedPreferences
+    await prefs.setStringList('savedCardIds', cardIds);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
