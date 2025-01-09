@@ -22,6 +22,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
   @override
   void initState() {
     super.initState();
+    _clearPreferences();
     _initSharedPreferences();
   }
 
@@ -80,6 +81,16 @@ class _CollectionScreenState extends State<CollectionScreen> {
       await _saveCardId(cardId.toString());
     });
     _loadSavedCardIds();
+  }
+
+  Future<void> _clearPreferences() async {
+    // Ottieni l'istanza di SharedPreferences
+    prefs = await SharedPreferences.getInstance();
+
+    // Cancella tutte le preferenze salvate
+    await prefs.clear();
+
+    print('Tutti gli elementi sono stati eliminati dalle SharedPreferences');
   }
 
   @override

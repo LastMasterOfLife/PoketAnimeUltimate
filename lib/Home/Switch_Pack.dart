@@ -84,7 +84,7 @@ class _SwitchPackState extends State<SwitchPack> {
     super.initState();
     _startTimer();
     fetchCards();
-    _init();
+    //_init();
   }
 
 

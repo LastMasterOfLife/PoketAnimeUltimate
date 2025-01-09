@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
@@ -11,46 +10,49 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  bool start = false; // Rimosso `late` poiché non necessario qui.
 
   final _player = AudioPlayer();
 
   Future<void> _init() async {
-    // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-          print('A stream error occurred: $e');
-        });
-    // Try to load audio from a source and catch any errors.
+    // Ascolta gli errori durante la riproduzione
+    _player.playbackEventStream.listen(
+          (event) {},
+      onError: (Object e, StackTrace stackTrace) {
+        debugPrint('Errore durante la riproduzione: $e');
+      },
+    );
     try {
-      // AAC example: https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac
       await _player.setAsset("assets/Audio/pescamisteriosa.mp3");
-      // Start playing the audio
-      await _player.play();
-      // Optional: Set the audio to loop
+      // Avvia la riproduzione dell'audio
       await _player.setLoopMode(LoopMode.all);
+      await _player.play();
     } on PlayerException catch (e) {
-      print("Error loading audio source: $e");
+      debugPrint("Errore durante il caricamento della sorgente audio: ${e.message}");
     }
   }
 
-  void navigazione(){
-    // Naviga automaticamente alla pagina di Login dopo 3 secondi
+  void _navigateAfterDelay() {
+    // Naviga automaticamente alla pagina di Login dopo 5 secondi
     Future.delayed(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const CustomerscaffoldScreen()),
-      );
+      setState(() {
+        start = true;
+      });
     });
   }
 
-
-
-
-  @override @override
+  @override
   void initState() {
     super.initState();
-    navigazione();
+    _navigateAfterDelay();
     _init();
+  }
+
+
+  @override
+  void dispose() {
+    _player.dispose();
+    super.dispose();
   }
 
 
@@ -58,22 +60,41 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const SizedBox(
+      body: start
+          ? GestureDetector(
+        onTap: () {
+          //_player.stop();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const CustomerscaffoldScreen()),
+          );
+        },
+        child: const Center(
+          child: Text(
+            "Tocca per continuare",
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+      )
+          : const SizedBox(
         height: double.infinity,
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(child: Text("Animaker", style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40
-            ),)),
+            Center(
+              child: Text(
+                "Animaker",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40,
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

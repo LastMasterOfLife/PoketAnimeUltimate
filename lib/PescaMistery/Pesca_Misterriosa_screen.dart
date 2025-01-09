@@ -18,7 +18,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
   void initState() {
     super.initState();
     _caricaCarte();
-    _init();
+    //_init();
   }
 
   Future<void> _init() async {
@@ -38,6 +38,12 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
     } on PlayerException catch (e) {
       print("Error loading audio source: $e");
     }
+  }
+
+  @override
+  void dispose() {
+    _player.dispose();
+    super.dispose();
   }
 
   Future<void> _caricaCarte() async {

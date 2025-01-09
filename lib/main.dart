@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Loading/Loading_screen.dart';
+import 'package:poketanime/Services/Audio_service.dart';
 
 void main() {
   runApp(const MyApp());
+  AudioService.playBackgroundMusic('assets/Audio/phone_anime.mp3');
 }
 
 class MyApp extends StatelessWidget {
