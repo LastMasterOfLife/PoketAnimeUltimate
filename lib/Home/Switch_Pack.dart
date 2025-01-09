@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
@@ -20,7 +21,29 @@ class SwitchPack extends StatefulWidget {
 }
 
 class _SwitchPackState extends State<SwitchPack> {
+  final _player = AudioPlayer();
    List<Map<String, dynamic>> objects = [];
+
+
+
+  Future<void> _init() async {
+    // Listen to errors during playback.
+    _player.playbackEventStream.listen((event) {},
+        onError: (Object e, StackTrace stackTrace) {
+          print('A stream error occurred: $e');
+        });
+    // Try to load audio from a source and catch any errors.
+    try {
+      // AAC example: https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac
+      await _player.setAsset("assets/Audio/phone_anime.mp3");
+      // Start playing the audio
+      await _player.play();
+      // Optional: Set the audio to loop
+      await _player.setLoopMode(LoopMode.all);
+    } on PlayerException catch (e) {
+      print("Error loading audio source: $e");
+    }
+  }
 
   Future<void> fetchCards() async {
     final url = Uri.parse('https://mocki.io/v1/e331d864-b3ed-4c52-b5fc-a5cd044b823a');
@@ -61,6 +84,7 @@ class _SwitchPackState extends State<SwitchPack> {
     super.initState();
     _startTimer();
     fetchCards();
+    _init();
   }
 
 
@@ -321,13 +345,13 @@ class _SwitchPackState extends State<SwitchPack> {
                                       Container(
                                         height: 50,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer
                                             ? Center(child: Text('$_seconds')) : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Container(
                                         height: 5,
                                         width: double.infinity,
@@ -345,7 +369,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                               end: Alignment.centerLeft,
                                             )
                                                 : null,
-                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
+                                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
                                         ),
                                       )
                                     ],
@@ -360,7 +384,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                 strokeWidth: 1,
                                 dashPattern: _showTimer2 ? [2,4] : [100,0], // lunghezza, spazio
                                 borderType: BorderType.RRect,
-                                radius: Radius.circular(5),
+                                radius: const Radius.circular(5),
                                 child: Container(
                                   height: 70,
                                   width: 45,
