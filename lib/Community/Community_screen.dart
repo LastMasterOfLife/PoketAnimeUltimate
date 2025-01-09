@@ -16,21 +16,17 @@ class _CommunityScreenState extends State<CommunityScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Center(child: Text('C O M M U N I T Y')),
-      ),
       body: Column(
         children: [
           Container(
             width: double.infinity,
-            height: screenHeight * 0.65,
+            height: screenHeight * 0.75,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/Sfondi/amin.jpg'),
                 fit: BoxFit.cover
               ),
+              borderRadius: BorderRadius.all(Radius.circular(20))
             ),
           ),
           Container(

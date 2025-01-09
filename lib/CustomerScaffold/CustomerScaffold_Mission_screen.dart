@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Mission/Cardex_screen.dart';
+import 'package:poketanime/Mission/Emblema_screen.dart';
 import 'package:poketanime/Mission/Giornaliere_screen.dart';
 
 class CustomerscaffoldMissionScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _CustomerscaffoldMissionScreenState
   final List<Widget> pages = [
     GiornaliereScreen(),
     CardexScreen(),
-    Center(child: Text("Pagina 3", style: TextStyle(fontSize: 24))),
+    EmblemaScreen(),
     Center(child: Text("Pagina 4", style: TextStyle(fontSize: 24))),
   ];
 
