@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:poketanime/Home/Card_exaple.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Colors.dart';
+
 class CollectionScreen extends StatefulWidget {
   final List<dynamic>? cardIds;
   const CollectionScreen({super.key, this.cardIds = const []});
@@ -18,6 +20,9 @@ class _CollectionScreenState extends State<CollectionScreen> {
   List<Map<String, dynamic>> items = [];
   bool isLoading = true;
   final TextEditingController searchController = TextEditingController();
+  bool JJK = true;
+  bool Tensei = false;
+  bool Slayer = false;
 
   @override
   void initState() {
@@ -146,6 +151,92 @@ class _CollectionScreenState extends State<CollectionScreen> {
                 ),
                 filled: true,
                 fillColor: Colors.grey[300],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 80,
+            width: double.infinity,
+            decoration: const BoxDecoration(color: Colors.transparent),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 0;
+                          if (!JJK) {
+                            JJK = !JJK;
+                          }
+                          Tensei = false;
+                          Slayer = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: JJK ? terziario.withOpacity(0.9) : Colors.white,
+                        elevation: 8,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Jiujizu Kaisen',style: TextStyle(fontSize: 20,color: JJK ? bianco : nero),),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 1;
+                          if (!Tensei) {
+                            Tensei = !Tensei;
+                          }
+                          JJK = false;
+                          Slayer = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Tensei ? terziario.withOpacity(0.9) : Colors.white,
+                          elevation: 8
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Mushoku Tensei',style: TextStyle(fontSize: 20,color: Tensei ? bianco : nero),),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedIndex = 2;
+                          if (!Slayer) {
+                            Slayer = !Slayer;
+                          }
+                          JJK = false;
+                          Tensei = false;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Slayer ? terziario.withOpacity(0.9) : Colors.white,
+                          elevation: 8
+                      ),
+                      child:  Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Demon Slayer',style: TextStyle(fontSize: 20,color: Slayer ? bianco : nero),),
+                      )),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
               ),
             ),
           ),
