@@ -133,17 +133,11 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
         if (_isMenuOverlayVisible)
           Stack(
             children: [
-              Positioned(
-                top: 0,
-                right: 0,
-                left: 0,
-                bottom: 0,
-                child: MenuComponent(visible: _isMenuOverlayVisible, onClose: () {
-                  setState(() {
-                    _isMenuOverlayVisible = false;
-                  });
-                },),
-              ),
+              MenuComponent(visible: _isMenuOverlayVisible, onClose: () {
+                setState(() {
+                  _isMenuOverlayVisible = false;
+                });
+              },),
             ],
           )
       ],
