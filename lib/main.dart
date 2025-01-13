@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Loading/Loading_screen.dart';
 import 'package:poketanime/Services/Audio_service.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: primary),
         useMaterial3: true,
       ),
       home: LoadingScreen(),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poketanime/Collection/Collection_Screen.dart';
 import 'package:poketanime/Colors.dart';
+import 'package:poketanime/Componets/menu_component.dart';
 import 'package:poketanime/Home/Switch_Pack.dart';
 import 'package:poketanime/Community/Community_screen.dart';
 import 'package:poketanime/Lotta/Lotte_screen.dart';
@@ -31,89 +32,121 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
     _pages.add(CollectionScreen(cardIds: widget.cardIds ?? []));
     _pages.add(const CommunityScreen());
     _pages.add(const LotteScreen());
-    _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible,));
+    _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible));
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 4) {
+      // Mostra o nascondi il menù laterale
+      setState(() {
+        _isMenuOverlayVisible = !_isMenuOverlayVisible;
+      });
+    } else {
+      setState(() {
+        _selectedIndex = index;
+        _isMenuOverlayVisible = false; // Nasconde il menù se è visibile
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          indicatorColor: Colors.transparent,
-          backgroundColor: secondary,
-          labelTextStyle: WidgetStateProperty.resolveWith((states) {
-            return const TextStyle(color: Colors.white);
-          }),
-          iconTheme: MaterialStateProperty.resolveWith((states) {
-            return const IconThemeData(
-              color: Colors.black,
-            );
-          }),
+    return Stack(
+      children: [
+        Scaffold(
+          extendBodyBehindAppBar: true,
+          body: _pages[_selectedIndex],
+          bottomNavigationBar: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              indicatorColor: Colors.transparent,
+              backgroundColor: secondary,
+              labelTextStyle: WidgetStateProperty.resolveWith((states) {
+                return const TextStyle(color: Colors.white);
+              }),
+              iconTheme: MaterialStateProperty.resolveWith((states) {
+                return const IconThemeData(
+                  color: Colors.black,
+                );
+              }),
+            ),
+            child: NavigationBar(
+              destinations: [
+                NavigationDestination(
+                  icon: AnimatedScale(
+                    scale: _selectedIndex == 0 ? 1.5 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Icon(Icons.home_filled),
+                  ),
+                  label: "",
+                ),
+                NavigationDestination(
+                  icon: AnimatedScale(
+                    scale: _selectedIndex == 1 ? 1.5 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Image(
+                      image: AssetImage('assets/icons/navigation_bar/collezione_icon.png'),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                  label: "",
+                ),
+                NavigationDestination(
+                  icon: AnimatedScale(
+                    scale: _selectedIndex == 2 ? 1.5 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Image(
+                      image: AssetImage('assets/icons/navigation_bar/scambi_icon.png'),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                  label: '',
+                ),
+                NavigationDestination(
+                  icon: AnimatedScale(
+                    scale: _selectedIndex == 3 ? 1.5 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Image(
+                      image: AssetImage('assets/icons/navigation_bar/lotta_icon.png'),
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                  label: '',
+                ),
+                NavigationDestination(
+                  icon: AnimatedScale(
+                    scale: _selectedIndex == 4 ? 1.5 : 1.0,
+                    duration: const Duration(milliseconds: 200),
+                    child: const Icon(Icons.menu),
+                  ),
+                  label: "",
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: _onItemTapped,
+            ),
+          ),
         ),
-        child: NavigationBar(
-          destinations: [
-            NavigationDestination(
-              icon: AnimatedScale(
-                scale: _selectedIndex == 0 ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.home_filled),
+        // Menù laterale
+        if (_isMenuOverlayVisible)
+          Stack(
+            children: [
+              Positioned(
+                top: 0,
+                right: 0,
+                left: 0,
+                bottom: 0,
+                child: MenuComponent(visible: _isMenuOverlayVisible, onClose: () {
+                  setState(() {
+                    _isMenuOverlayVisible = false;
+                  });
+                },),
               ),
-              label: "",
-            ),
-            NavigationDestination(
-              icon: AnimatedScale(
-                scale: _selectedIndex == 1 ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: const Image(
-                  image: AssetImage('assets/icons/navigation_bar/collezione_icon.png'),
-                  width: 30, height: 30,
-                ),
-              ),
-              label: "",
-            ),
-            NavigationDestination(
-              icon: AnimatedScale(
-                scale: _selectedIndex == 2 ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: const Image(
-                  image: AssetImage('assets/icons/navigation_bar/scambi_icon.png'),
-                  width: 30, height: 30,
-                ),
-              ),
-              label: '',
-            ),
-            NavigationDestination(
-              icon: AnimatedScale(
-                scale: _selectedIndex == 3 ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: const Image(
-                  image: AssetImage('assets/icons/navigation_bar/lotta_icon.png'),
-                  width: 30, height: 30,
-                ),
-              ),
-              label: '',
-            ),
-            NavigationDestination(
-              icon: AnimatedScale(
-                scale: _selectedIndex == 4 ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.menu),
-              ),
-              label: "",
-            ),
-          ],
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: _onItemTapped,
-        ),
-      ),
+            ],
+          )
+      ],
     );
   }
 }

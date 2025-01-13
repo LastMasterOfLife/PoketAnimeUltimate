@@ -21,29 +21,8 @@ class SwitchPack extends StatefulWidget {
 }
 
 class _SwitchPackState extends State<SwitchPack> {
-  final _player = AudioPlayer();
    List<Map<String, dynamic>> objects = [];
 
-
-
-  Future<void> _init() async {
-    // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-          print('A stream error occurred: $e');
-        });
-    // Try to load audio from a source and catch any errors.
-    try {
-      // AAC example: https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac
-      await _player.setAsset("assets/Audio/phone_anime.mp3");
-      // Start playing the audio
-      await _player.play();
-      // Optional: Set the audio to loop
-      await _player.setLoopMode(LoopMode.all);
-    } on PlayerException catch (e) {
-      print("Error loading audio source: $e");
-    }
-  }
 
   Future<void> fetchCards() async {
     final url = Uri.parse('https://mocki.io/v1/e331d864-b3ed-4c52-b5fc-a5cd044b823a');
@@ -84,7 +63,6 @@ class _SwitchPackState extends State<SwitchPack> {
     super.initState();
     _startTimer();
     fetchCards();
-    //_init();
   }
 
 

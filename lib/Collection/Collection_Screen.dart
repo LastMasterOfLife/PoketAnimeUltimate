@@ -22,7 +22,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
   @override
   void initState() {
     super.initState();
-    _clearPreferences();
+    //_clearPreferences();
     _initSharedPreferences();
   }
 
