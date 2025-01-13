@@ -33,27 +33,37 @@ class _CollectionScreenState extends State<CollectionScreen> {
   }
 
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final cardsList = data['cards'] as List<dynamic>;
+    try {
+      final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        if (data.containsKey('cards')) {
+          final cardsList = data['cards'] as List<dynamic>;
+          setState(() {
+            items = cardsList.map((item) {
+              final itemId = item['Id'].toString();
+              return {
+                'id': itemId,
+                'name': item['Nome'] ?? '',
+                'image': item['Immagine_sfondo'] ?? '',
+                'locked': true,
+                'discovered': false,
+              };
+            }).toList();
+            isLoading = false;
+          });
+        } else {
+          throw Exception('Chiave "cards" non trovata nella risposta API');
+        }
+      } else {
+        throw Exception('Errore nel recupero delle carte');
+      }
+    } catch (e) {
+      print('Errore durante il recupero delle carte: $e');
       setState(() {
-        items = cardsList.map((item) {
-          final itemId = item['Id'].toString();
-          return {
-            'id': itemId,
-            'name': item['Name'] ?? '',
-            'image': item['Immagine_sfondo'] ?? '',
-            'locked': true, // Tutte bloccate di default
-            'discovered': false,
-          };
-        }).toList();
         isLoading = false;
       });
-      _unlockSavedCards();
-    } else {
-      throw Exception('Errore nel recupero delle carte');
     }
   }
 
@@ -98,11 +108,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
     const double itemHeight = 50.0;
     const double itemWidth = 30.0;
 
-    List<Map<String, dynamic>> filteredItems = items.where((item) =>
+    List<Map<String, dynamic>> filteredItems = searchController.text.isEmpty
+        ? items
+        : items.where((item) =>
         item['name']
             .toLowerCase()
             .trim()
             .contains(searchController.text.toLowerCase().trim())).toList();
+
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -116,7 +129,11 @@ class _CollectionScreenState extends State<CollectionScreen> {
             child: TextField(
               onChanged: (value) {
                 setState(() {
-                  searchController.text = value;
+                  filteredItems = items.where((item) =>
+                      item['name']
+                          .toLowerCase()
+                          .trim()
+                          .contains(value.toLowerCase().trim())).toList();
                 });
               },
               controller: searchController,
