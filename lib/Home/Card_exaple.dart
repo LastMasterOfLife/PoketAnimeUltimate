@@ -6,8 +6,9 @@ import 'package:poketanime/Componets/Card_Detail_Component.dart';
 
 class CardExample extends StatefulWidget {
   final int index;
+  final int? pack;
 
-  const CardExample({super.key, required this.index});
+  const CardExample({super.key, required this.index, required this.pack});
 
   @override
   State<CardExample> createState() => _CardExampleState();
@@ -19,7 +20,8 @@ class _CardExampleState extends State<CardExample> {
   @override
   void initState() {
     super.initState();
-    cardData = fetchCardData(widget.index);
+    smistamento(widget.pack);
+    cardData = fetchCardData(widget.index,smistamento(widget.pack));
 
     // Mostra la modale automaticamente quando la pagina viene creata
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -35,10 +37,26 @@ class _CardExampleState extends State<CardExample> {
     });
   }
 
+  String smistamento(int? index){
+    var URL = "";
+    switch(index) {
+      case 0:
+        URL = "";
+        break;
+      case 1:
+        URL = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
+        break;
+      case 2:
+        URL = "https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c";
+        break;
+      default:
+    }
+    return URL;
+  }
+
   // Funzione per ottenere i dati della carta specifica
-  Future<Map<String, dynamic>> fetchCardData(int id) async {
-    const String apiUrl =
-        "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
+  Future<Map<String, dynamic>> fetchCardData(int id,String apiUrl) async {
+    //const String apiUrl = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
     try {
       final response = await http.get(Uri.parse(apiUrl));
 

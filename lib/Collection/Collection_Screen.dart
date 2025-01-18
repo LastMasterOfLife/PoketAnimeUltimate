@@ -312,7 +312,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             InkWell(
               onTap: () {
                 if (!locked && discovered) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index,pack: widget.index,)));
                 }
               },
               child: ClipRRect(
