@@ -128,7 +128,7 @@ class _SceltascreenState extends State<Sceltascreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (contex) => CardVisual()));
+                                          builder: (contex) => CardVisual(index: widget.index,)));
                                 },
                                 child: Image.asset(
                                   object['fileName']!,

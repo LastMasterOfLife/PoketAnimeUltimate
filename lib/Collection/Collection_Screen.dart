@@ -8,7 +8,8 @@ import '../Colors.dart';
 
 class CollectionScreen extends StatefulWidget {
   final List<dynamic>? cardIds;
-  const CollectionScreen({super.key, this.cardIds = const []});
+  final int? index;
+  const CollectionScreen({super.key, this.cardIds = const [], required this.index});
 
   @override
   State<CollectionScreen> createState() => _CollectionScreenState();
@@ -33,13 +34,13 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
   Future<void> _initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
-    await fetchCards();
-    _loadSavedCardIds();
+    await fetchCards("https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff");
+    _loadSavedCardIds("savedCardIdsJK");
   }
 
-  Future<void> fetchCards() async {
+  Future<void> fetchCards(String apiUrl) async {
     try {
-      final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+      final url = Uri.parse(apiUrl);
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
@@ -58,6 +59,11 @@ class _CollectionScreenState extends State<CollectionScreen> {
             }).toList();
             isLoading = false;
           });
+          for (var item in items) {
+            if (widget.cardIds?.contains(item['id']) ?? false) {
+              await _saveCardId(item['id'], widget.index!);  // Usa widget.index come l'indice
+            }
+          }
         } else {
           throw Exception('Chiave "cards" non trovata nella risposta API');
         }
@@ -72,16 +78,37 @@ class _CollectionScreenState extends State<CollectionScreen> {
     }
   }
 
-  Future<void> _saveCardId(String cardId) async {
-    List<String> savedCardIds = prefs.getStringList('savedCardIds') ?? [];
+  Future<void> _saveCardId(String cardId, int index) async {
+    // Determina la chiave da usare in base all'index
+    String key;
+    switch (index) {
+      case 0:
+        key = 'savedCardIdsMT';
+        break;
+      case 1:
+        key = 'savedCardIdsJK';
+        break;
+      case 2:
+        key = 'savedCardIdsDS';
+        break;
+      default:
+        throw ArgumentError('Index non valido: $index');
+    }
+
+    // Recupera la lista salvata o una lista vuota
+    List<String> savedCardIds = prefs.getStringList(key) ?? [];
+
+    // Aggiungi l'ID alla lista solo se non è già presente
     if (!savedCardIds.contains(cardId)) {
       savedCardIds.add(cardId);
-      await prefs.setStringList('savedCardIds', savedCardIds);
+      // Salva la lista aggiornata nelle SharedPreferences
+      await prefs.setStringList(key, savedCardIds);
     }
   }
 
-  void _loadSavedCardIds() {
-    List<String> savedCardIds = prefs.getStringList('savedCardIds') ?? [];
+
+  void _loadSavedCardIds(String key) {
+    List<String> savedCardIds = prefs.getStringList(key) ?? [];
     for (var item in items) {
       if (savedCardIds.contains(item['id'])) {
         item['locked'] = false;
@@ -91,12 +118,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
     setState(() {});
   }
 
-  void _unlockSavedCards() {
-    widget.cardIds?.forEach((cardId) async {
-      await _saveCardId(cardId.toString());
-    });
-    _loadSavedCardIds();
-  }
 
   Future<void> _clearPreferences() async {
     // Ottieni l'istanza di SharedPreferences
@@ -168,7 +189,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     width: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           selectedIndex = 0;
                           if (!JJK) {
@@ -177,6 +198,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
                           Tensei = false;
                           Slayer = false;
                         });
+                        await fetchCards("https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff");
+                        _loadSavedCardIds("savedCardIdsJK");
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: JJK ? terziario.withOpacity(0.9) : Colors.white,
@@ -212,7 +235,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                     width: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           selectedIndex = 2;
                           if (!Slayer) {
@@ -221,6 +244,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
                           JJK = false;
                           Tensei = false;
                         });
+                        await fetchCards("https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c");
+                        _loadSavedCardIds("savedCardIdsDS");
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Slayer ? terziario.withOpacity(0.9) : Colors.white,

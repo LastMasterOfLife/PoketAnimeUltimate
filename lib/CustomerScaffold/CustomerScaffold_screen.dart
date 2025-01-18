@@ -10,8 +10,9 @@ import 'package:poketanime/Menu/Menu_screen.dart';
 class CustomerscaffoldScreen extends StatefulWidget {
   final List<String>? cardIds;
   final int? index;
+  final int? pack;
 
-  const CustomerscaffoldScreen({super.key, this.cardIds, this.index});
+  const CustomerscaffoldScreen({super.key, this.cardIds, this.index, this.pack});
 
   @override
   State<CustomerscaffoldScreen> createState() => _CustomerscaffoldScreenState();
@@ -29,7 +30,7 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
     _selectedIndex = widget.index ?? 0;
     _isMenuOverlayVisible = false;
     _pages.add(const SwitchPack());
-    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? []));
+    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [],index: widget.pack,));
     _pages.add(const CommunityScreen());
     _pages.add(const LotteScreen());
     _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible));

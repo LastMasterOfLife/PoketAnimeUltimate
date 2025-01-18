@@ -6,8 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class RiassuntospaccettamentoScreen extends StatefulWidget {
   final List<Map<String, dynamic>> cards;
+  final int pack;
 
-  const RiassuntospaccettamentoScreen({super.key, required this.cards});
+  const RiassuntospaccettamentoScreen({super.key, required this.cards, required this.pack});
 
   @override
   State<RiassuntospaccettamentoScreen> createState() =>
@@ -20,7 +21,6 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _initPrefs();
   }
@@ -83,7 +83,7 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CustomerscaffoldScreen(cardIds: cardIds,index: 1),
+              builder: (context) => CustomerscaffoldScreen(cardIds: cardIds,index: 1,pack: widget.pack,),
             ),
           );
         },

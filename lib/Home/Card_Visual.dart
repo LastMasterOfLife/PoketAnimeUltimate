@@ -6,7 +6,8 @@ import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/RiassuntoSpaccettamento_screen.dart';
 
 class CardVisual extends StatefulWidget {
-  const CardVisual({super.key});
+  final int index;
+  const CardVisual({super.key, required this.index});
 
   @override
   State<CardVisual> createState() => _CardVisualState();
@@ -35,8 +36,23 @@ class _CardVisualState extends State<CardVisual> {
     return path;
   }
 
-  Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+  Future<void> fetchCards(int index) async {
+    var url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+
+    switch(index) {
+      case 0:
+        url = Uri.parse('');
+        break;
+      case 1:
+        url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+        break;
+      case 2:
+        url = Uri.parse('https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c');
+        break;
+      default:
+    }
+
+    //final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -69,7 +85,7 @@ class _CardVisualState extends State<CardVisual> {
   @override
   void initState() {
     super.initState();
-    fetchCards();
+    fetchCards(widget.index);
   }
 
   @override
@@ -104,7 +120,7 @@ class _CardVisualState extends State<CardVisual> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RiassuntospaccettamentoScreen(cards: cards),
+                            builder: (context) => RiassuntospaccettamentoScreen(cards: cards,pack: widget.index,),
                           ),
                         );
                       }

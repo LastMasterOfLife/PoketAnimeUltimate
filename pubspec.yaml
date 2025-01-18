@@ -79,6 +79,15 @@ flutter:
      - assets/KaisenPack/cards/rara/characters/
      - assets/KaisenPack/cards/speciale/backgrounds/
      - assets/KaisenPack/cards/speciale/characters/
+     - assets/SlayerPack/cards/comune/
+     - assets/SlayerPack/cards/rara/
+     - assets/SlayerPack/cards/speciale/
+     - assets/SlayerPack/cards/comune/backgrounds/
+     - assets/SlayerPack/cards/comune/characters/
+     - assets/SlayerPack/cards/rara/backgrounds/
+     - assets/SlayerPack/cards/rara/characters/
+     - assets/SlayerPack/cards/speciale/backgrounds/
+     - assets/SlayerPack/cards/speciale/characters/
      - assets/3DPack/Jiujizu_Kaisen/
      - assets/3DPack/Mushoku_Tensei/
      - assets/3DPack/Demon_Slayer/
