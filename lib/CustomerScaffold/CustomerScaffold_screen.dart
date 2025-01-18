@@ -30,7 +30,7 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
     _selectedIndex = widget.index ?? 0;
     _isMenuOverlayVisible = false;
     _pages.add(const SwitchPack());
-    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [],index: widget.pack,));
+    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [],index: widget.pack ?? 1,));
     _pages.add(const CommunityScreen());
     _pages.add(const LotteScreen());
     _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible));

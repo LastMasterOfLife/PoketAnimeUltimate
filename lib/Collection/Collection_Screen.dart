@@ -17,7 +17,7 @@ class CollectionScreen extends StatefulWidget {
 
 class _CollectionScreenState extends State<CollectionScreen> {
   late SharedPreferences prefs;
-  int selectedIndex = 0;
+  int selectedIndex = 1;
   List<Map<String, dynamic>> items = [];
   bool isLoading = true;
   final TextEditingController searchController = TextEditingController();
@@ -191,7 +191,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   ElevatedButton(
                       onPressed: () async {
                         setState(() {
-                          selectedIndex = 0;
+                          selectedIndex = 1;
                           if (!JJK) {
                             JJK = !JJK;
                           }
@@ -215,7 +215,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          selectedIndex = 1;
+                          selectedIndex = 0;
                           if (!Tensei) {
                             Tensei = !Tensei;
                           }
@@ -312,7 +312,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             InkWell(
               onTap: () {
                 if (!locked && discovered) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index,pack: widget.index,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index,pack: widget.index ?? selectedIndex,)));
                 }
               },
               child: ClipRRect(

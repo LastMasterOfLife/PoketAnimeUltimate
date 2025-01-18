@@ -23,7 +23,6 @@ class _CardExampleState extends State<CardExample> {
     smistamento(widget.pack);
     cardData = fetchCardData(widget.index,smistamento(widget.pack));
 
-    // Mostra la modale automaticamente quando la pagina viene creata
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
         final card = await cardData;
@@ -38,7 +37,7 @@ class _CardExampleState extends State<CardExample> {
   }
 
   String smistamento(int? index){
-    var URL = "";
+    var URL = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
     switch(index) {
       case 0:
         URL = "";
@@ -51,6 +50,8 @@ class _CardExampleState extends State<CardExample> {
         break;
       default:
     }
+    debugPrint("index: $index");
+    debugPrint("URL selezionato: $URL");
     return URL;
   }
 
