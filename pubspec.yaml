@@ -42,6 +42,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.3.5
   just_audio: ^0.9.42
+  video_player: ^2.9.2
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +97,7 @@ flutter:
      - assets/ImgEspansione/
      - assets/icons/consumabili/
      - assets/icons/avatar/
+     - assets/Video/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

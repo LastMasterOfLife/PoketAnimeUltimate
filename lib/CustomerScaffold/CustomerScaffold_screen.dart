@@ -6,6 +6,7 @@ import 'package:poketanime/Home/Switch_Pack.dart';
 import 'package:poketanime/Community/Community_screen.dart';
 import 'package:poketanime/Lotta/Lotte_screen.dart';
 import 'package:poketanime/Menu/Menu_screen.dart';
+import 'package:audioplayers/audioplayers.dart';  // Importa il pacchetto audio
 
 class CustomerscaffoldScreen extends StatefulWidget {
   final List<String>? cardIds;
@@ -24,21 +25,31 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
   bool _isMenuOverlayVisible = false;
   final List<Widget> _pages = [];
 
+  final AudioPlayer _audioPlayer = AudioPlayer(); // Aggiungi il player audio
+
   @override
   void initState() {
     super.initState();
+    _startBackgroundMusic();
     _selectedIndex = widget.index ?? 0;
     _isMenuOverlayVisible = false;
     _pages.add(const SwitchPack());
-    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [],index: widget.pack ?? 1,));
+    _pages.add(CollectionScreen(cardIds: widget.cardIds ?? [], index: widget.pack ?? 1));
     _pages.add(const CommunityScreen());
     _pages.add(const LotteScreen());
     _pages.add(MenuScreen(isMenuOverlayVisible: _isMenuOverlayVisible));
   }
 
+  void _startBackgroundMusic() async {
+    print("Inizializzazione della musica");
+    await _audioPlayer.setReleaseMode(ReleaseMode.loop);
+    await _audioPlayer.setVolume(1.0);
+    await _audioPlayer.play(AssetSource('Audio/caricamento.mp3'));
+    print("Musica avviata");
+  }
+
   void _onItemTapped(int index) {
     if (index == 4) {
-      // Mostra o nascondi il menù laterale
       setState(() {
         _isMenuOverlayVisible = !_isMenuOverlayVisible;
       });
@@ -48,6 +59,12 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
         _isMenuOverlayVisible = false; // Nasconde il menù se è visibile
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.stop(); // Ferma la musica quando la schermata viene distrutta
+    super.dispose();
   }
 
   @override
@@ -138,9 +155,9 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
                 setState(() {
                   _isMenuOverlayVisible = false;
                 });
-              },),
+              }),
             ],
-          )
+          ),
       ],
     );
   }
