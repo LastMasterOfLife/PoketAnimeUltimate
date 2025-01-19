@@ -6,9 +6,9 @@ import 'package:poketanime/Componets/Card_Detail_Component.dart';
 
 class CardExample extends StatefulWidget {
   final int index;
-  final int? pack;
+  final String Apipoint;
 
-  const CardExample({super.key, required this.index, required this.pack});
+  const CardExample({super.key, required this.index, required this.Apipoint});
 
   @override
   State<CardExample> createState() => _CardExampleState();
@@ -20,8 +20,8 @@ class _CardExampleState extends State<CardExample> {
   @override
   void initState() {
     super.initState();
-    smistamento(widget.pack);
-    cardData = fetchCardData(widget.index,smistamento(widget.pack));
+    //smistamento(widget.pack);
+    cardData = fetchCardData(widget.index,widget.Apipoint);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {

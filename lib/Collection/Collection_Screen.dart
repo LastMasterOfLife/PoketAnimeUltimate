@@ -24,12 +24,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
   bool JJK = true;
   bool Tensei = false;
   bool Slayer = false;
+  String Apipoint = "";
 
   @override
   void initState() {
     super.initState();
     //_clearPreferences();
     _initSharedPreferences();
+    Apipoint = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
   }
 
   Future<void> _initSharedPreferences() async {
@@ -192,6 +194,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       onPressed: () async {
                         setState(() {
                           selectedIndex = 1;
+                          Apipoint = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
                           if (!JJK) {
                             JJK = !JJK;
                           }
@@ -216,6 +219,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       onPressed: () {
                         setState(() {
                           selectedIndex = 0;
+                          Apipoint = "";
                           if (!Tensei) {
                             Tensei = !Tensei;
                           }
@@ -238,6 +242,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       onPressed: () async {
                         setState(() {
                           selectedIndex = 2;
+                          Apipoint = "https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c";
                           if (!Slayer) {
                             Slayer = !Slayer;
                           }
@@ -312,7 +317,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
             InkWell(
               onTap: () {
                 if (!locked && discovered) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index,pack: widget.index ?? selectedIndex,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> CardExample(index: index,Apipoint: Apipoint ?? "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff",)));
                 }
               },
               child: ClipRRect(
