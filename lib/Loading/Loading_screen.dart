@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:audioplayers/audioplayers.dart'; // Importa audioplayers
+import 'package:audioplayers/audioplayers.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
+
+import '../Colors.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -15,15 +17,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   late VideoPlayerController _controller1;
   late VideoPlayerController _controller2;
   late VideoPlayerController _controller3;
-  VideoPlayerController? _currentController; // Modifica: ora è nullable
+  VideoPlayerController? _currentController;
 
-  final AudioPlayer _audioPlayer = AudioPlayer(); // Aggiungi l'AudioPlayer
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void initState() {
     super.initState();
     _initializeVideos();
-    _startBackgroundMusic(); // Avvia la musica di sottofondo
     _navigateAfterDelay();
   }
 
@@ -74,13 +75,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     });
   }
 
-  void _startBackgroundMusic() async {
-    // Riproduci la musica in loop
-    await _audioPlayer.setReleaseMode(ReleaseMode.loop);
-    await _audioPlayer.setVolume(1.0);
-    await _audioPlayer.play(AssetSource('assets/Audio/caricamento.mp3'));// Sostituisci con il percorso corretto
-
-  }
 
   void _navigateAfterDelay() {
     Future.delayed(const Duration(seconds: 5), () {
@@ -95,7 +89,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     _controller1.dispose();
     _controller2.dispose();
     _controller3.dispose();
-    _audioPlayer.dispose(); // Disabilita il player quando lo screen viene distrutto
+    _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -127,13 +121,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 ),
               ),
             if (start)
-              const Align(
+              Align(
                 alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 50.0),
-                  child: Text(
-                    "Tocca per continuare",
-                    style: TextStyle(fontSize: 30, color: Colors.white),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: nero.withOpacity(0.5),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(bottom: 50.0,left: 30,right: 30),
+                    child: Text(
+                      "Tocca per continuare",
+                      style: TextStyle(fontSize: 30, color: Colors.white),
+                    ),
                   ),
                 ),
               ),

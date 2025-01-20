@@ -18,27 +18,8 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
   void initState() {
     super.initState();
     _caricaCarte();
-    //_init();
   }
 
-  Future<void> _init() async {
-    // Listen to errors during playback.
-    _player.playbackEventStream.listen((event) {},
-        onError: (Object e, StackTrace stackTrace) {
-          print('A stream error occurred: $e');
-        });
-    // Try to load audio from a source and catch any errors.
-    try {
-      // AAC example: https://dl.espressif.com/dl/audio/ff-16b-2c-44100hz.aac
-      await _player.setAsset("assets/Audio/pescamisteriosa.mp3");
-      // Start playing the audio
-      await _player.play();
-      // Optional: Set the audio to loop
-      await _player.setLoopMode(LoopMode.all);
-    } on PlayerException catch (e) {
-      print("Error loading audio source: $e");
-    }
-  }
 
   @override
   void dispose() {
@@ -61,7 +42,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
                 return {
                   "id" : carta['Id'] ?? "",
                   "name": carta['Nome'] ?? "Nome sconosciuto",
-                  "image": carta['Immagine_sfondo'] ?? "https://via.placeholder.com/150", // Placeholder image
+                  "image": carta['Immagine_sfondo'] ?? "https://via.placeholder.com/150",
                   "type": carta['Rarita'] ?? "Comune",
                   'character': carta['Immagine_personaggio'] ?? '',
                   'abilities': carta['abilities'] ?? '',

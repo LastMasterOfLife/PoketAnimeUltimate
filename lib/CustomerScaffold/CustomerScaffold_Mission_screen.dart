@@ -31,10 +31,9 @@ class _CustomerscaffoldMissionScreenState
   }
 
   final List<Widget> pages = [
-    GiornaliereScreen(),
-    CardexScreen(),
-    EmblemaScreen(),
-    Center(child: Text("Pagina 4", style: TextStyle(fontSize: 24))),
+    const GiornaliereScreen(),
+    const CardexScreen(),
+    const EmblemaScreen(),
   ];
 
   @override
@@ -126,29 +125,6 @@ class _CustomerscaffoldMissionScreenState
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('Emblema'),
-                      )),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          selectedIndex = 3;
-                          if (!premium) {
-                            premium = !premium;
-                          }
-                          gionaliero = false;
-                          cardex = false;
-                          emblema  = false;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: premium ? Colors.orangeAccent.withOpacity(1) : Colors.white,
-                          elevation: 8
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('Premium'),
                       )),
                   const SizedBox(
                     width: 10,

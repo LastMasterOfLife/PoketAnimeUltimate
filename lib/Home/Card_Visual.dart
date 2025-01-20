@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
-import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Home/RiassuntoSpaccettamento_screen.dart';
 
 class CardVisual extends StatefulWidget {
@@ -52,7 +51,6 @@ class _CardVisualState extends State<CardVisual> {
       default:
     }
 
-    //final url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -96,7 +94,6 @@ class _CardVisualState extends State<CardVisual> {
       );
     }
 
-    // Invertiamo l'ordine solo per la visualizzazione
     final reversedCards = List.from(cards.reversed);
     final reversedVisibility = List.from(visibility.reversed);
 
@@ -109,7 +106,6 @@ class _CardVisualState extends State<CardVisual> {
             children: List.generate(reversedCards.length, (uiIndex) {
               final logicalIndex = reversedCards.length - 1 - uiIndex;
               final card = reversedCards[uiIndex];
-
               return Visibility(
                 visible: reversedVisibility[uiIndex],
                 child: GestureDetector(
@@ -164,14 +160,13 @@ class _CardVisualState extends State<CardVisual> {
                     ),
                   ),
                 ),
-                // Nome del personaggio
                 Positioned(
                   top: 10,
                   left: 15,
                   right: 15,
                   child: Center(
                     child: Text(
-                      card['fileName'], // Nome del personaggio
+                      card['fileName'],
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -187,7 +182,6 @@ class _CardVisualState extends State<CardVisual> {
                     ),
                   ),
                 ),
-                // Statistiche
                 Positioned(
                   bottom: 40,
                   left: 15,
@@ -203,32 +197,31 @@ class _CardVisualState extends State<CardVisual> {
                       children: [
                         Text(
                           "Abilità: ${card['abilities']}",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text(
                           "Attacco: ${card['attack']}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         Text(
                           "Difesa: ${card['defense']}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         Text(
                           "Velocità: ${card['speed']}",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),
                   ),
                 ),
-                // Energia in basso
                 Positioned(
                   bottom: 10,
                   right: 15,
                   child: Row(
                     children: [
-                      Icon(Icons.bolt, color: Colors.yellow, size: 24),
+                      const Icon(Icons.bolt, color: Colors.yellow, size: 24),
                       Text(
                         "${card['energy']}",
                         style: const TextStyle(
@@ -262,7 +255,6 @@ class _CardVisualState extends State<CardVisual> {
           ),
           child: Stack(
             children: [
-              // Sfondo della carta
               Positioned.fill(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -272,7 +264,6 @@ class _CardVisualState extends State<CardVisual> {
                   ),
                 ),
               ),
-              // Immagine del personaggio
               Positioned(
                 top: 0,
                 left: 0,
@@ -288,14 +279,13 @@ class _CardVisualState extends State<CardVisual> {
                   ),
                 ),
               ),
-              // Nome del personaggio
               Positioned(
                 top: 10,
                 left: 15,
                 right: 15,
                 child: Center(
                   child: Text(
-                    card['fileName'], // Nome del personaggio
+                    card['fileName'],
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -311,7 +301,6 @@ class _CardVisualState extends State<CardVisual> {
                   ),
                 ),
               ),
-              // Statistiche
               Positioned(
                 bottom: 40,
                 left: 15,
@@ -346,7 +335,6 @@ class _CardVisualState extends State<CardVisual> {
                   ),
                 ),
               ),
-              // Energia in basso
               Positioned(
                 bottom: 10,
                 right: 15,

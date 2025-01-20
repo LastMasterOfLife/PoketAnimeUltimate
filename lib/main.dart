@@ -5,7 +5,7 @@ import 'package:poketanime/Services/Audio_service.dart';
 
 void main() {
   runApp(const MyApp());
-  AudioService.playBackgroundMusic('assets/Audio/phone_anime.mp3');
+  AudioService.playBackgroundMusic('assets/Audio/caricamento.mp3');
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: primary),
         useMaterial3: true,

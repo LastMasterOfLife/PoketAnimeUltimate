@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
@@ -131,7 +130,7 @@ class _SwitchPackState extends State<SwitchPack> {
                       ),
                       InkWell(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>VetrinaScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const VetrinaScreen()));
                         },
                         child: Container(
                           width: 100,
@@ -226,7 +225,7 @@ class _SwitchPackState extends State<SwitchPack> {
                           color: Colors.blueAccent,
                           spreadRadius: 1,
                           blurRadius: 1,
-                          offset: const Offset(1, 1),
+                          offset: Offset(1, 1),
                         ),
                       ],
                     ),
@@ -291,7 +290,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                 strokeWidth: 1,
                                 dashPattern: _showTimer ? [2,4] : [100,0], // lunghezza, spazio
                                 borderType: BorderType.RRect,
-                                radius: Radius.circular(5),
+                                radius: const Radius.circular(5),
                                 child: Container(
                                   height: 70,
                                   width: 45,
@@ -302,18 +301,18 @@ class _SwitchPackState extends State<SwitchPack> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: _showTimer
-                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                              : null, // Nessun colore se non visibile
+                                              ? Colors.grey.shade400.withOpacity(0.6)
+                                              : null,
                                           gradient: !_showTimer
                                               ? LinearGradient(
                                             colors: [
-                                              Colors.purpleAccent.shade100, // Viola chiaro
-                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                              Colors.purpleAccent.shade100,
+                                              Colors.lightBlueAccent.shade100,
                                             ],
                                             begin: Alignment.centerRight,
                                             end: Alignment.centerLeft,
                                           )
-                                              : null, // Nessun gradiente quando il timer è attivo
+                                              : null,
                                           borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(5),
                                             topRight: Radius.circular(5),
@@ -335,13 +334,13 @@ class _SwitchPackState extends State<SwitchPack> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                             color: _showTimer
-                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                                : null, // Nessun colore se non visibile
+                                                ? Colors.grey.shade400.withOpacity(0.6)
+                                                : null,
                                             gradient: !_showTimer
                                                 ? LinearGradient(
                                               colors: [
-                                                Colors.purpleAccent.shade100, // Viola chiaro
-                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                                Colors.purpleAccent.shade100,
+                                                Colors.lightBlueAccent.shade100,
                                               ],
                                               begin: Alignment.centerRight,
                                               end: Alignment.centerLeft,
@@ -373,18 +372,18 @@ class _SwitchPackState extends State<SwitchPack> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: _showTimer2
-                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                              : null, // Nessun colore se non visibile
+                                              ? Colors.grey.shade400.withOpacity(0.6)
+                                              : null,
                                           gradient: !_showTimer2
                                               ? LinearGradient(
                                             colors: [
-                                              Colors.purpleAccent.shade100, // Viola chiaro
-                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                              Colors.purpleAccent.shade100,
+                                              Colors.lightBlueAccent.shade100,
                                             ],
                                             begin: Alignment.centerRight,
                                             end: Alignment.centerLeft,
                                           )
-                                              : null, // Nessun gradiente quando il timer è attivo
+                                              : null,
                                           borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(5),
                                             topRight: Radius.circular(5),
@@ -394,7 +393,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                       Container(
                                         height: 50,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer2
@@ -406,19 +405,19 @@ class _SwitchPackState extends State<SwitchPack> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                             color: _showTimer2
-                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                                : null, // Nessun colore se non visibile
+                                                ? Colors.grey.shade400.withOpacity(0.6)
+                                                : null,
                                             gradient: !_showTimer2
                                                 ? LinearGradient(
                                               colors: [
-                                                Colors.purpleAccent.shade100, // Viola chiaro
-                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                                Colors.purpleAccent.shade100,
+                                                Colors.lightBlueAccent.shade100,
                                               ],
                                               begin: Alignment.centerRight,
                                               end: Alignment.centerLeft,
                                             )
                                                 : null,
-                                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
+                                            borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5))
                                         ),
                                       )
                                     ],
@@ -444,18 +443,18 @@ class _SwitchPackState extends State<SwitchPack> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           color: _showTimer3
-                                              ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                              : null, // Nessun colore se non visibile
+                                              ? Colors.grey.shade400.withOpacity(0.6)
+                                              : null,
                                           gradient: !_showTimer3
                                               ? LinearGradient(
                                             colors: [
-                                              Colors.purpleAccent.shade100, // Viola chiaro
-                                              Colors.lightBlueAccent.shade100, // Azzurrino
+                                              Colors.purpleAccent.shade100,
+                                              Colors.lightBlueAccent.shade100,
                                             ],
                                             begin: Alignment.centerRight,
                                             end: Alignment.centerLeft,
                                           )
-                                              : null, // Nessun gradiente quando il timer è attivo
+                                              : null,
                                           borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(5),
                                             topRight: Radius.circular(5),
@@ -465,25 +464,25 @@ class _SwitchPackState extends State<SwitchPack> {
                                       Container(
                                         height: 50,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.transparent,
                                         ),
                                         child: _showTimer3
                                             ? Center(child: Text('$_seconds3')) : Center(child: Image.asset('assets/icons/benda_icon.png',fit: BoxFit.contain,width: 40,height: 40,)),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Container(
                                         height: 5,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                             color: _showTimer3
-                                                ? Colors.grey.shade400.withOpacity(0.6) // Colore grigio con opacità quando il timer è attivo
-                                                : null, // Nessun colore se non visibile
+                                                ? Colors.grey.shade400.withOpacity(0.6)
+                                                : null,
                                             gradient: !_showTimer3
                                                 ? LinearGradient(
                                               colors: [
-                                                Colors.purpleAccent.shade100, // Viola chiaro
-                                                Colors.lightBlueAccent.shade100, // Azzurrino
+                                                Colors.purpleAccent.shade100,
+                                                Colors.lightBlueAccent.shade100,
                                               ],
                                               begin: Alignment.centerRight,
                                               end: Alignment.centerLeft,
@@ -555,10 +554,10 @@ class _SwitchPackState extends State<SwitchPack> {
                               children: [
                                 InkWell(
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CustomerscaffoldMissionScreen()));
                                     },
                                     child: Padding(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             horizontal: 20, vertical: 20),
                                         child: Image.asset(
                                           color: nero,
@@ -566,7 +565,7 @@ class _SwitchPackState extends State<SwitchPack> {
                                           fit: BoxFit.contain,
                                           scale: 6.5,
                                         ))),
-                                Text(
+                                const Text(
                                   'Missioni',
                                   style: TextStyle(color: Colors.grey),
                                 ),
@@ -586,9 +585,7 @@ class _SwitchPackState extends State<SwitchPack> {
                             child: Column(
                               children: [
                                 InkWell(
-                                    onTap: () {
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldMissionScreen()));
-                                    },
+                                    onTap: () {},
                                     child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 20, vertical: 20),

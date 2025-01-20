@@ -26,7 +26,7 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
   void _updateProgress() {
     setState(() {
       if (_progress < 1.0) {
-        _progress += 0.2; // Incremento del 20%
+        _progress += 0.2;
         if (_progress > 1.0) {
           _progress = 1.0;
         }

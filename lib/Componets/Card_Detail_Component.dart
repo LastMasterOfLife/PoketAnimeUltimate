@@ -51,7 +51,6 @@ class _CardDetailComponentState extends State<CardDetailComponent> {
             ),
             child: Stack(
               children: [
-                // Sfondo della carta
                 Positioned.fill(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
@@ -61,7 +60,6 @@ class _CardDetailComponentState extends State<CardDetailComponent> {
                     ),
                   ),
                 ),
-                // Energia in basso
                 Positioned(
                   bottom: 10,
                   right: 15,
@@ -101,7 +99,6 @@ class _CardDetailComponentState extends State<CardDetailComponent> {
           ),
           child: Stack(
             children: [
-              // Sfondo della carta
               Positioned.fill(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -111,7 +108,6 @@ class _CardDetailComponentState extends State<CardDetailComponent> {
                   ),
                 ),
               ),
-              // Immagine del personaggio
               Positioned(
                 top: 20,
                 left: 50,

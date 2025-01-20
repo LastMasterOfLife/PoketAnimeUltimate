@@ -1,7 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:poketanime/Componets/Neu_box.dart';
-import 'package:poketanime/colors.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});

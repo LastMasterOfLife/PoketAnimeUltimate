@@ -43,14 +43,13 @@ class _CardComponentState extends State<CardComponent> {
             image: DecorationImage(image: AssetImage(buildBorder(widget.card['type'] ?? widget.card['Rarety'])),fit: BoxFit.cover),
           ),
           child: Container(
-            margin: const EdgeInsets.all(10), // Spazio per il bordo
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Colors.transparent,
             ),
             child: Stack(
               children: [
-                // Sfondo della carta
                 Positioned.fill(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
@@ -82,7 +81,6 @@ class _CardComponentState extends State<CardComponent> {
           ),
           child: Stack(
             children: [
-              // Sfondo della carta
               Positioned.fill(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -92,7 +90,6 @@ class _CardComponentState extends State<CardComponent> {
                   ),
                 ),
               ),
-              // Immagine del personaggio
               Positioned(
                 top: 0,
                 left: 0,

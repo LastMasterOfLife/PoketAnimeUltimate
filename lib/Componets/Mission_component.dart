@@ -57,7 +57,7 @@ class _MissionComponentState extends State<MissionComponent> {
                       decoration: BoxDecoration(
                         color: secondary,
                         border: Border.all(color: bianco,width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        borderRadius: const BorderRadius.all(Radius.circular(18)),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -105,7 +105,7 @@ class _MissionComponentState extends State<MissionComponent> {
                       decoration: BoxDecoration(
                         color: secondary,
                         border: Border.all(color: bianco,width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        borderRadius: const BorderRadius.all(Radius.circular(18)),
                       ),
                       child: Row(
                         children: [
@@ -169,7 +169,7 @@ class _MissionComponentState extends State<MissionComponent> {
                     decoration: BoxDecoration(
                       color: secondary,
                       border: Border.all(color: bianco,width: 2),
-                      borderRadius: BorderRadius.all(Radius.circular(18)),
+                      borderRadius: const BorderRadius.all(Radius.circular(18)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

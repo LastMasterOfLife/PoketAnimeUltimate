@@ -42,8 +42,7 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Sfondo
-          Image(image: AssetImage('assets/Sfondi/sfondo_pachetto.png'), fit: BoxFit.cover, width: double.infinity),
+          const Image(image: AssetImage('assets/Sfondi/sfondo_pachetto.png'), fit: BoxFit.cover, width: double.infinity),
           SafeArea(
             child: Column(
               children: [
@@ -110,7 +109,7 @@ class _HomescreenState extends State<Homescreen> {
                     const SizedBox(width: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CustomerscaffoldScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const CustomerscaffoldScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(20),
@@ -154,9 +153,9 @@ class _HomescreenState extends State<Homescreen> {
       context: context,
       builder: (BuildContext context) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.9, // Dimensione iniziale della modale
-          minChildSize: 0.1, // Dimensione minima della modale
-          maxChildSize: 0.9, // Dimensione massima della modale
+          initialChildSize: 0.9,
+          minChildSize: 0.1,
+          maxChildSize: 0.9,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
               color: bianco,
@@ -164,7 +163,7 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                   const SizedBox(height: 10),
                   Align(
-                    alignment: Alignment.topLeft, // Posiziona in alto a sinistra
+                    alignment: Alignment.topLeft,
                     child: InkWell(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const Homescreen(index: 1),));
@@ -190,7 +189,7 @@ class _HomescreenState extends State<Homescreen> {
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context); // Chiudi la modale
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -224,7 +223,7 @@ class _HomescreenState extends State<Homescreen> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        padding: isPrimary ? EdgeInsets.symmetric(vertical: 12, horizontal: 20) : EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+        padding: isPrimary ? const EdgeInsets.symmetric(vertical: 12, horizontal: 20) : const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
         backgroundColor: isPrimary ? terziario : bianco,
         shape: shape ?? const RoundedRectangleBorder(),
         elevation: 8,

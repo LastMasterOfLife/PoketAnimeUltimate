@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:poketanime/Collection/Collection_Screen.dart';
 import 'package:poketanime/Componets/Card_Component.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +16,7 @@ class RiassuntospaccettamentoScreen extends StatefulWidget {
 
 class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoScreen> {
 
-  late SharedPreferences prefs; // Dichiarazione senza inizializzare
+  late SharedPreferences prefs;
 
   @override
   void initState() {
@@ -30,13 +29,11 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
   }
 
   Future<void> _saveCardIds() async {
-    // Estrai gli ID delle carte e convertirli in stringhe
     final cardIds = widget.cards.map<String>((card) {
       var id = card['id'];
-      return id is int ? id.toString() : id; // Converte id a stringa se necessario
+      return id is int ? id.toString() : id;
     }).toList();
 
-    // Salva l'elenco degli ID come una stringa JSON nelle SharedPreferences
     await prefs.setStringList('savedCardIds', cardIds);
   }
 
@@ -73,13 +70,10 @@ class _RiassuntospaccettamentoScreenState extends State<RiassuntospaccettamentoS
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Estrai gli ID delle carte e convertirli a String se sono int
-          final cardIds = widget.cards.map<String>((card) {  // Impostato il tipo esplicitamente come String
+          final cardIds = widget.cards.map<String>((card) {
             var id = card['id'];
-            return id is int ? id.toString() : id;  // Converte id a stringa se è un intero
+            return id is int ? id.toString() : id;
           }).toList();
-
-          // Naviga alla CustomerscaffoldScreen passando cardIds
           Navigator.push(
             context,
             MaterialPageRoute(

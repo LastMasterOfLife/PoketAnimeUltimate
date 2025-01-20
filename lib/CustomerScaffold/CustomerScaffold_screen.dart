@@ -6,7 +6,7 @@ import 'package:poketanime/Home/Switch_Pack.dart';
 import 'package:poketanime/Community/Community_screen.dart';
 import 'package:poketanime/Lotta/Lotte_screen.dart';
 import 'package:poketanime/Menu/Menu_screen.dart';
-import 'package:audioplayers/audioplayers.dart';  // Importa il pacchetto audio
+import 'package:audioplayers/audioplayers.dart';
 
 class CustomerscaffoldScreen extends StatefulWidget {
   final List<String>? cardIds;
@@ -25,7 +25,7 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
   bool _isMenuOverlayVisible = false;
   final List<Widget> _pages = [];
 
-  final AudioPlayer _audioPlayer = AudioPlayer(); // Aggiungi il player audio
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -56,14 +56,14 @@ class _CustomerscaffoldScreenState extends State<CustomerscaffoldScreen> {
     } else {
       setState(() {
         _selectedIndex = index;
-        _isMenuOverlayVisible = false; // Nasconde il menù se è visibile
+        _isMenuOverlayVisible = false;
       });
     }
   }
 
   @override
   void dispose() {
-    _audioPlayer.stop(); // Ferma la musica quando la schermata viene distrutta
+    _audioPlayer.stop();
     super.dispose();
   }
 

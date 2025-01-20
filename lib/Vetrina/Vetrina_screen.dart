@@ -44,7 +44,6 @@ class _VetrinaScreenState extends State<VetrinaScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Prima riga con 3 elementi
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(3, (index) {
@@ -66,9 +65,7 @@ class _VetrinaScreenState extends State<VetrinaScreen> {
                           );
                         }),
                       ),
-                      const SizedBox(height: 10), // Spaziatura tra le righe
-                  
-                      // Seconda riga con 3 elementi
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(3, (index) {
@@ -90,9 +87,7 @@ class _VetrinaScreenState extends State<VetrinaScreen> {
                           );
                         }),
                       ),
-                      const SizedBox(height: 10), // Spaziatura tra le righe
-                  
-                      // Terza riga con 1 elemento centrale
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -114,7 +109,7 @@ class _VetrinaScreenState extends State<VetrinaScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 100,),
+                      const SizedBox(height: 100,),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: ElevatedButton(
@@ -128,14 +123,14 @@ class _VetrinaScreenState extends State<VetrinaScreen> {
                             shadowColor: Colors.blueAccent.withOpacity(1),
                             elevation: 10,
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.close,
                             size: 30,
                             color: grigio,
                           ),
                         ),
                       ),
-                      SizedBox(height: 20,)
+                      const SizedBox(height: 20,)
                     ],
                   ),
                 ),

@@ -20,7 +20,6 @@ class _CardExampleState extends State<CardExample> {
   @override
   void initState() {
     super.initState();
-    //smistamento(widget.pack);
     cardData = fetchCardData(widget.index,widget.Apipoint);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -30,7 +29,6 @@ class _CardExampleState extends State<CardExample> {
           showCardModal(card);
         }
       } catch (e) {
-        // Gestione dell'errore durante il caricamento della modale
         debugPrint("Errore durante la visualizzazione della modale: $e");
       }
     });
@@ -57,7 +55,6 @@ class _CardExampleState extends State<CardExample> {
 
   // Funzione per ottenere i dati della carta specifica
   Future<Map<String, dynamic>> fetchCardData(int id,String apiUrl) async {
-    //const String apiUrl = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
     try {
       final response = await http.get(Uri.parse(apiUrl));
 
@@ -191,8 +188,6 @@ class _CardExampleState extends State<CardExample> {
                       ),
                     ],
                   ),
-
-
                 ],
               ),
             ),
@@ -249,7 +244,7 @@ class _CardExampleState extends State<CardExample> {
                     height: 80,
                     decoration: BoxDecoration(
                       color: primary.withOpacity(0.9),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(20),
                           topLeft: Radius.circular(20)
                       ),

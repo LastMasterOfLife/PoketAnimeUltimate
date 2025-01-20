@@ -5,9 +5,8 @@ class AudioService {
 
   static Future<void> playBackgroundMusic(String audioUrl) async {
     try {
-      // Carica e avvia la musica
       await _audioPlayer.setUrl(audioUrl);
-      _audioPlayer.setLoopMode(LoopMode.all); // Imposta la musica in loop
+      _audioPlayer.setLoopMode(LoopMode.all);
       _audioPlayer.play();
     } catch (e) {
       print('Errore nel caricamento della musica: $e');

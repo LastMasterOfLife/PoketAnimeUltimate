@@ -18,22 +18,7 @@ class Sceltascreen extends StatefulWidget {
 }
 
 class _SceltascreenState extends State<Sceltascreen> {
-   List<Map<String, dynamic>> objects = [
-     /*
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-    {'fileName': 'assets/img_pack/jiujizu_kaisen_pack.jpg'},
-
-      */
-  ];
+   List<Map<String, dynamic>> objects = [];
 
    @override
   void initState() {
@@ -41,14 +26,12 @@ class _SceltascreenState extends State<Sceltascreen> {
     scelta(widget.index);
   }
 
-  int _currentIndex = 6; // Traccia l'indice corrente della slide
+  int _currentIndex = 6;
 
    List<Map<String,String>> generate(List<Map<String, String>> card) {
 
     final random = Random();
     final selectedCards = <Map<String, String>>{};
-
-    // Continua a selezionare elementi finché non ne hai 3 unici
     while (selectedCards.length < 3) {
       int randomIndex = random.nextInt(card.length);
       selectedCards.add(card[randomIndex]);
@@ -92,7 +75,6 @@ class _SceltascreenState extends State<Sceltascreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          //image: DecorationImage(image: AssetImage('assets/Sfondi/sfondo_pachetto.png')),
           color: Color(0xFFCEC1FE),
         ),
           child: Center(

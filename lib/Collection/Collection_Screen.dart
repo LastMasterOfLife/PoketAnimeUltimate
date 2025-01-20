@@ -63,7 +63,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
           });
           for (var item in items) {
             if (widget.cardIds?.contains(item['id']) ?? false) {
-              await _saveCardId(item['id'], widget.index!);  // Usa widget.index come l'indice
+              await _saveCardId(item['id'], widget.index!);
             }
           }
         } else {
@@ -81,7 +81,6 @@ class _CollectionScreenState extends State<CollectionScreen> {
   }
 
   Future<void> _saveCardId(String cardId, int index) async {
-    // Determina la chiave da usare in base all'index
     String key;
     switch (index) {
       case 0:
@@ -97,13 +96,10 @@ class _CollectionScreenState extends State<CollectionScreen> {
         throw ArgumentError('Index non valido: $index');
     }
 
-    // Recupera la lista salvata o una lista vuota
     List<String> savedCardIds = prefs.getStringList(key) ?? [];
 
-    // Aggiungi l'ID alla lista solo se non è già presente
     if (!savedCardIds.contains(cardId)) {
       savedCardIds.add(cardId);
-      // Salva la lista aggiornata nelle SharedPreferences
       await prefs.setStringList(key, savedCardIds);
     }
   }
@@ -122,10 +118,8 @@ class _CollectionScreenState extends State<CollectionScreen> {
 
 
   Future<void> _clearPreferences() async {
-    // Ottieni l'istanza di SharedPreferences
     prefs = await SharedPreferences.getInstance();
 
-    // Cancella tutte le preferenze salvate
     await prefs.clear();
 
     print('Tutti gli elementi sono stati eliminati dalle SharedPreferences');
@@ -232,7 +226,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                           elevation: 8
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text('Mushoku Tensei',style: TextStyle(fontSize: 20,color: Tensei ? bianco : nero),),
                       )),
                   const SizedBox(
@@ -257,7 +251,7 @@ class _CollectionScreenState extends State<CollectionScreen> {
                           elevation: 8
                       ),
                       child:  Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text('Demon Slayer',style: TextStyle(fontSize: 20,color: Slayer ? bianco : nero),),
                       )),
                   const SizedBox(

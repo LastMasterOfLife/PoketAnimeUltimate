@@ -13,21 +13,20 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Sfondo trasparente per rilevare il tap fuori
         GestureDetector(
           onTap: () {
             setState(() {
-              widget.isMenuOverlayVisible = false; // Nascondi il menu
+              widget.isMenuOverlayVisible = false;
             });
           },
           child: Container(
-            color: Colors.black.withOpacity(0.5), // Sfondo semitrasparente
+            color: Colors.black.withOpacity(0.5),
           ),
         ),
         Align(
           alignment: Alignment.centerRight,
           child: GestureDetector(
-            onTap: () {}, // Evita che il tap dentro il rettangolo nasconda il menu
+            onTap: () {},
             child: Container(
               width: 250,
               height: double.infinity,
@@ -39,7 +38,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 8,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -49,9 +48,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   ListTile(
                     title: Text("Opzione 1"),
                     onTap: () {
-                      // Azione per Opzione 1
                       setState(() {
-                        widget.isMenuOverlayVisible = false; // Nascondi il menu
+                        widget.isMenuOverlayVisible = false;
                       });
                     },
                   ),
@@ -60,11 +58,10 @@ class _MenuScreenState extends State<MenuScreen> {
                     onTap: () {
                       // Azione per Opzione 2
                       setState(() {
-                        widget.isMenuOverlayVisible = false; // Nascondi il menu
+                        widget.isMenuOverlayVisible = false;
                       });
                     },
                   ),
-                  // Aggiungi altre opzioni qui
                 ],
               ),
             ),
