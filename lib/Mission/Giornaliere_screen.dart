@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:poketanime/Componets/Mission_component.dart';
 import 'package:poketanime/colors.dart'; // Assicurati che il nome sia corretto
 import 'dart:convert';
+
+import '../Services/ApiPoint/ListAPI.dart';
 class GiornaliereScreen extends StatefulWidget {
   const GiornaliereScreen({super.key});
 
@@ -35,7 +37,7 @@ class _GiornaliereScreenState extends State<GiornaliereScreen> {
   }
 
   Future<void> fetchMissions() async {
-    final url = Uri.parse('https://mocki.io/v1/449ef0a3-60a5-4ab4-82b4-11cd6f3eca5d');
+    final url = Uri.parse(ListMissionDay);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {

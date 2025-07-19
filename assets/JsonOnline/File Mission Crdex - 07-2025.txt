@@ -1,0 +1,43 @@
+File Mission Crdex 
+
+https://mocki.io/v1/670ccd4c-f595-44bb-8454-a79fa70f76db
+
+{
+  "mission": [
+    {
+      "Id": 0,
+      "title": "Registra 5 carte",
+      "Descrizione": "Registra 5 carte di Jiujizu Kaisen nel cardex",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "2"
+    },
+    {
+      "Id": 1,
+      "title": "Registra 15 carte",
+      "Descrizione": "Registra 15 carte di Jiujizu Kaisen nel cardex",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "4"
+    },
+    {
+      "Id": 2,
+      "title": "Registra 25 carte",
+      "Descrizione": "Registra 25 carte di Jiujizu Kaisen nel cardex",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "6"
+    },
+    {
+      "Id": 3,
+      "title": "Registra 50 carte",
+      "Descrizione": "Registra 50 carte di Jiujizu Kaisen nel cardex",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "10"
+    },
+    {
+      "Id": 4,
+      "title": "Registra 100 carte",
+      "Descrizione": "Registra 100 carte di Jiujizu Kaisen nel cardex",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "15"
+    }
+  ]
+}

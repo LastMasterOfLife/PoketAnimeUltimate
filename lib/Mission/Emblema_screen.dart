@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Mission_component.dart';
 
+import '../Services/ApiPoint/ListAPI.dart';
+
 class EmblemaScreen extends StatefulWidget {
   const EmblemaScreen({super.key});
 
@@ -25,7 +27,7 @@ class _EmblemaScreenState extends State<EmblemaScreen> {
 
 
   Future<void> fetchMissions() async {
-    final url = Uri.parse('https://mocki.io/v1/0a916b1e-2bf0-433d-a1fb-5d2d18750011');
+    final url = Uri.parse(ListMissionEmblema);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {

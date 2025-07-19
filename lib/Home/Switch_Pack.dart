@@ -10,6 +10,7 @@ import 'package:poketanime/Componets/Neu_box.dart';
 import 'package:poketanime/Home/HomeScreen.dart';
 import 'package:poketanime/CustomerScaffold/CustomerScaffold_Mission_screen.dart';
 import 'package:poketanime/PescaMistery/Pesca_Misterriosa_screen.dart';
+import 'package:poketanime/Services/ApiPoint/ListAPI.dart';
 import 'package:poketanime/Vetrina/Vetrina_screen.dart';
 
 class SwitchPack extends StatefulWidget {
@@ -23,8 +24,9 @@ class _SwitchPackState extends State<SwitchPack> {
    List<Map<String, dynamic>> objects = [];
 
 
+  /// Funzione per recuperare i pack
   Future<void> fetchCards() async {
-    final url = Uri.parse('https://mocki.io/v1/e331d864-b3ed-4c52-b5fc-a5cd044b823a');
+    final url = Uri.parse(ListPack); // URL per i tre pack di carte
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

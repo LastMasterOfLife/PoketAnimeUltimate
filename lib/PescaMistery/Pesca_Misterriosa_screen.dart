@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:poketanime/PescaMistery/Mescolamento_screen.dart';
 
+import '../Services/ApiPoint/ListAPI.dart';
+
 class PescaMisteriosaScreen extends StatefulWidget {
   @override
   _PescaMisteriosaScreenState createState() => _PescaMisteriosaScreenState();
@@ -30,7 +32,7 @@ class _PescaMisteriosaScreenState extends State<PescaMisteriosaScreen> {
   Future<void> _caricaCarte() async {
     for (int i = 0; i < 5; i++) {
       try {
-        final response = await http.get(Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff'));
+        final response = await http.get(Uri.parse(mysteryPackDS));
         if (response.statusCode == 200) {
           final Map<String, dynamic> data = json.decode(response.body);
           final List<dynamic> cardsList = data['cards'] ?? [];

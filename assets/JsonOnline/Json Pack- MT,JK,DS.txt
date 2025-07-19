@@ -1,0 +1,22 @@
+File Json 3 Pack
+https://mocki.io/v1/056a7211-7387-4e64-b11d-bda4467202e3
+
+{
+  "pack": [
+    {
+      "Id": 0,
+      "title": "Mushoku Tensei",
+      "path": "assets/img_pack/mushoku_tensei_pack.jpg"
+    },
+    {
+      "Id": 1,
+      "title": "Jiujizu Kaisen",
+      "path": "assets/img_pack/jiujizu_kaisen_pack.jpg"
+    },
+    {
+      "Id": 2,
+      "title": "Demon Slayer",
+      "path": "assets/img_pack/demon_slayer_pack.jpg"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+file Missioni Emblema
+
+https://mocki.io/v1/d52c3ec5-d91a-461f-8019-6ac52eaf7e02
+
+
+{
+  "mission": [
+    {
+      "Id": 0,
+      "title": "Lotta",
+      "Descrizione": "Vinci una lotta",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "4"
+    },
+    {
+      "Id": 1,
+      "title": "Lotta",
+      "Descrizione": "Vinci 3 lotte",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "6"
+    },
+    {
+      "Id": 2,
+      "title": "Lotta",
+      "Descrizione": "Vinci 6 lotte",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "6"
+    },
+    {
+      "Id": 3,
+      "title": "Lotta",
+      "Descrizione": "Completa 4 lotte",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "10"
+    },
+    {
+      "Id": 4,
+      "title": "Lotta",
+      "Descrizione": "Completa 6 lotte",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "15"
+    },
+    {
+      "Id": 5,
+      "title": "Lotta",
+      "Descrizione": "Completa 10",
+      "riconpensa": "assets/icons/consumabili/emblem_cardex.png",
+      "num": "25"
+    }
+  ]
+}

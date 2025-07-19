@@ -4,6 +4,8 @@ import 'package:flutter_tilt/flutter_tilt.dart';
 import 'package:http/http.dart' as http;
 import 'package:poketanime/Home/RiassuntoSpaccettamento_screen.dart';
 
+import '../Services/ApiPoint/ListAPI.dart';
+
 class CardVisual extends StatefulWidget {
   final int index;
   const CardVisual({super.key, required this.index});
@@ -36,17 +38,17 @@ class _CardVisualState extends State<CardVisual> {
   }
 
   Future<void> fetchCards(int index) async {
-    var url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+    var url = Uri.parse(JujutsuKaisenPack); // Default URL Jujutsu Kaisen
 
     switch(index) {
-      case 0:
+      case 0: // Mushoku Tensei
         url = Uri.parse('');
         break;
-      case 1:
-        url = Uri.parse('https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff');
+      case 1: // Jujutsu Kaisen
+        url = Uri.parse(JujutsuKaisenPack);
         break;
-      case 2:
-        url = Uri.parse('https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c');
+      case 2: // Demon Slayer
+        url = Uri.parse(DemonSlayerPack);
         break;
       default:
     }

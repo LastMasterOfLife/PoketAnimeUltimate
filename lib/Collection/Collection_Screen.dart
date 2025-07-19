@@ -5,6 +5,7 @@ import 'package:poketanime/Home/Card_exaple.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Colors.dart';
+import '../Services/ApiPoint/ListAPI.dart';
 
 class CollectionScreen extends StatefulWidget {
   final List<dynamic>? cardIds;
@@ -31,12 +32,12 @@ class _CollectionScreenState extends State<CollectionScreen> {
     super.initState();
     //_clearPreferences();
     _initSharedPreferences();
-    Apipoint = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
+    Apipoint = JujutsuKaisenPack;
   }
 
   Future<void> _initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
-    await fetchCards("https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff");
+    await fetchCards(JujutsuKaisenPack);
     _loadSavedCardIds("savedCardIdsJK");
   }
 
@@ -188,14 +189,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       onPressed: () async {
                         setState(() {
                           selectedIndex = 1;
-                          Apipoint = "https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff";
+                          Apipoint = JujutsuKaisenPack;
                           if (!JJK) {
                             JJK = !JJK;
                           }
                           Tensei = false;
                           Slayer = false;
                         });
-                        await fetchCards("https://mocki.io/v1/f2bfd528-17d7-4070-87af-217fcdf7f0ff");
+                        await fetchCards(JujutsuKaisenPack);
                         _loadSavedCardIds("savedCardIdsJK");
                       },
                       style: ElevatedButton.styleFrom(
@@ -236,14 +237,14 @@ class _CollectionScreenState extends State<CollectionScreen> {
                       onPressed: () async {
                         setState(() {
                           selectedIndex = 2;
-                          Apipoint = "https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c";
+                          Apipoint = DemonSlayerPack;
                           if (!Slayer) {
                             Slayer = !Slayer;
                           }
                           JJK = false;
                           Tensei = false;
                         });
-                        await fetchCards("https://mocki.io/v1/1a3e18b7-8c0a-4d4a-bb2f-2273f388994c");
+                        await fetchCards(DemonSlayerPack);
                         _loadSavedCardIds("savedCardIdsDS");
                       },
                       style: ElevatedButton.styleFrom(

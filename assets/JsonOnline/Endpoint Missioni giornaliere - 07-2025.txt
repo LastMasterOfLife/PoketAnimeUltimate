@@ -1,0 +1,39 @@
+Endpoint Missioni giornaliere
+
+https://mocki.io/v1/ab7eeaea-f6c0-44ab-ad8f-45c891b29dd3
+
+
+{
+  "mission": [
+    {
+      "Id": 0,
+      "title": "Una bustina",
+      "Descrizione": "Apri una bustina di Jijizu Kaisen",
+      "riconpensa": "nessuna riconpensa"
+    },
+    {
+      "Id": 1,
+      "title": "Due bustine",
+      "Descrizione": "Apri due bustine di Jijizu Kaisen",
+      "riconpensa": "nessuna riconpensa"
+    },
+    {
+      "Id": 2,
+      "title": "Tre bustine",
+      "Descrizione": "Apri tre bustine di Jijizu Kaisen",
+      "riconpensa": "nessuna riconpensa"
+    },
+    {
+      "Id": 3,
+      "title": "Pesca misteriosa",
+      "Descrizione": "Effettua una pesca misteriosa di Jijizu Kaisen",
+      "riconpensa": "nessuna riconpensa"
+    },
+    {
+      "Id": 4,
+      "title": "Pesca misteriosa",
+      "Descrizione": "Effettua due volte una pesca misteriosa di Jijizu Kaisen",
+      "riconpensa": "nessuna riconpensa"
+    }
+  ]
+}

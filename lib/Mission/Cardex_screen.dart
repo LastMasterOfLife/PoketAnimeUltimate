@@ -4,6 +4,8 @@ import 'package:poketanime/Colors.dart';
 import 'package:poketanime/Componets/Mission_component.dart';
 import 'package:http/http.dart' as http;
 
+import '../Services/ApiPoint/ListAPI.dart';
+
 class CardexScreen extends StatefulWidget {
   const CardexScreen({super.key});
 
@@ -25,7 +27,7 @@ class _CardexScreenState extends State<CardexScreen> {
 
 
   Future<void> fetchMissions() async {
-    final url = Uri.parse('https://mocki.io/v1/9d5445e2-c2a6-496c-b41b-752eff095a0f');
+    final url = Uri.parse(ListMissionCardex);
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
