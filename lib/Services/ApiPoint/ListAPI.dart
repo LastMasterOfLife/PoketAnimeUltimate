@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-const ListPack = "https://mocki.io/v1/056a7211-7387-4e64-b11d-bda4467202e3"; // lista 3 pack
-const DemonSlayerPack = "https://mocki.io/v1/fb5f1de6-5fe0-4a35-bad5-6e3b41ad66ca"; // lista Demon Slayer
-const JujutsuKaisenPack = "https://mocki.io/v1/576b2fe5-cb4f-4a45-9f8d-d99bffe24df9"; // lista Jujutsu Kaisen
-const ListMissionDay = "https://mocki.io/v1/ab7eeaea-f6c0-44ab-ad8f-45c891b29dd3"; // lista Mission Day
-const ListMissionCardex = "https://mocki.io/v1/670ccd4c-f595-44bb-8454-a79fa70f76db"; // lista Mission Cardex
-const ListMissionEmblema = "https://mocki.io/v1/d52c3ec5-d91a-461f-8019-6ac52eaf7e02"; // lista Mission Emblema
+const ListPack = "https://mocki.io/v1/42c14f94-1847-44e8-9629-38b40918b6cd"; // lista 3 pack
+const DemonSlayerPack = "https://mocki.io/v1/16236884-c734-44db-860c-1c6ad908b932"; // lista Demon Slayer
+const JujutsuKaisenPack = "https://mocki.io/v1/242b73d1-7a3e-4f58-83f0-741a583d0060"; // lista Jujutsu Kaisen
+const ListMissionDay = "https://mocki.io/v1/a869c11c-532c-4f31-bdd1-52ac250594e1"; // lista Mission Day
+const ListMissionCardex = "https://mocki.io/v1/e9130261-080c-4ae6-a415-eb88133da4f4"; // lista Mission Cardex
+const ListMissionEmblema = "https://mocki.io/v1/6287ed92-7810-44db-8d6b-efc343ed98e4"; // lista Mission Emblema
 
-const MysteryPackJK = "https://mocki.io/v1/576b2fe5-cb4f-4a45-9f8d-d99bffe24df9"; // lista Pesca Misteriosa di Jujutsu Kaisen
-const mysteryPackDS = "https://mocki.io/v1/fb5f1de6-5fe0-4a35-bad5-6e3b41ad66ca"; // lista Pesca Misteriosa di Demon Slayer
+const MysteryPackJK = "https://mocki.io/v1/242b73d1-7a3e-4f58-83f0-741a583d0060"; // lista Pesca Misteriosa di Jujutsu Kaisen
+const mysteryPackDS = "https://mocki.io/v1/16236884-c734-44db-860c-1c6ad908b932"; // lista Pesca Misteriosa di Demon Slayer

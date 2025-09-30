@@ -1,7 +1,7 @@
 Demon Slayer Pack
 
 file json con 51 cards
-https://mocki.io/v1/fb5f1de6-5fe0-4a35-bad5-6e3b41ad66ca
+https://mocki.io/v1/16236884-c734-44db-860c-1c6ad908b932
 
 {
   "cards": [
