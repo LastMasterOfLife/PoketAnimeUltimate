@@ -1,6 +1,6 @@
 Endpoint Missioni giornaliere
 
-https://mocki.io/v1/a869c11c-532c-4f31-bdd1-52ac250594e1
+https://mocki.io/v1/049fbffc-39d7-4696-a98f-d282ec5ae86a
 
 
 {
